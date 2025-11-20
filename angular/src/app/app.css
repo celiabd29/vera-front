@@ -1,0 +1,35 @@
+.navbar {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 1rem;
+background: #1976d2;
+color: white;
+}
+
+
+.nav-links {
+list-style: none;
+display: flex;
+gap: 1rem;
+}
+
+
+.nav-links a {
+color: white;
+text-decoration: none;
+font-weight: bold;
+}
+
+
+.search-bar {
+margin: 0 2rem;
+padding: 0.5rem;
+border-radius: 4px;
+border: none;
+}
+
+
+.content {
+padding: 2rem;
+}
