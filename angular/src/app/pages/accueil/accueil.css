@@ -1,0 +1,25 @@
+.TopName {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 100vh;
+  background-color: #A0BDA0;
+  padding: 2rem;
+}
+
+.TopName h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #222;
+}
+
+.TopName p {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.TopName form {
+    margin-top: 20px;
+}
