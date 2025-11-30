@@ -1,4 +1,4 @@
-.navbar {
+/* .navbar {
 display: flex;
 justify-content: space-between;
 align-items: center;
@@ -23,4 +23,42 @@ font-weight: bold;
 
 .content {
 padding: 2rem;
+} */
+
+
+:root {
+  --bg-color: aqua;
+  --content-bg: white;
+  --navbar-bg: #1976d2;
+  --text-color: black;
+  --link-color: white;
+}
+
+body.dark {
+  --bg-color: #121212;
+  --content-bg: #1e1e1e;
+  --navbar-bg: #333;
+  --text-color: #e0e0e0;
+  --link-color: #e0e0e0;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  background: var(--navbar-bg);
+  color: var(--text-color);
+}
+
+.nav-links a {
+  color: var(--link-color);
+}
+
+.content {
+  background-color: var(--content-bg);
+  color: var(--text-color);
 }
