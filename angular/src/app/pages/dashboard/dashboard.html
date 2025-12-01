@@ -1,0 +1,29 @@
+<div class="dashboard">
+  <h2>Résultats du sondage</h2>
+
+  <div *ngIf="loading">Chargement des résultats...</div>
+  <div *ngIf="error && !loading" class="error">
+    {{ error }}
+  </div>
+
+  <table *ngIf="!loading && !error && surveyData.length > 0">
+    <thead>
+      <tr>
+        <th *ngFor="let head of headers">
+          {{ head }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of surveyData">
+        <td *ngFor="let head of headers">
+          {{ row[head] }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading && !error && surveyData.length === 0">
+    Aucun résultat pour le moment.
+  </div>
+</div>
