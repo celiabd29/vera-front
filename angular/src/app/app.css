@@ -1,4 +1,4 @@
-/* .navbar {
+.navbar {
 display: flex;
 justify-content: space-between;
 align-items: center;
@@ -23,9 +23,9 @@ font-weight: bold;
 
 .content {
 padding: 2rem;
-} */
+} 
 
-
+/*
 :root {
   --bg-color: aqua;
   --content-bg: white;
@@ -62,3 +62,4 @@ body {
   background-color: var(--content-bg);
   color: var(--text-color);
 }
+*/

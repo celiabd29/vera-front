@@ -1,4 +1,4 @@
-/* .TopName {
+.TopName {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,9 +22,9 @@
 
 .TopName form {
     margin-top: 20px;
-} */
+} 
 
-
+/*
 .TopName {
   display: flex;
   flex-direction: column;
@@ -47,3 +47,4 @@
   font-size: 1.2rem;
   color: var(--text-color);
 }
+*/
