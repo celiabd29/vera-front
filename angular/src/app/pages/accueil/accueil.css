@@ -22,4 +22,29 @@
 
 .TopName form {
     margin-top: 20px;
+} 
+
+/*
+.TopName {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 100vh;
+  background-color: var(--content-bg);
+  padding: 2rem;
+  color: var(--text-color);
 }
+
+.TopName h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+}
+
+.TopName p {
+  font-size: 1.2rem;
+  color: var(--text-color);
+}
+*/
