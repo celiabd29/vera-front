@@ -1,18 +1,18 @@
-<header class="w-full border-b border-slate-200 bg-black/40">
+<header class="bg-white dark:bg-black/40">
   <div class="max-w-5xl mx-auto flex items-center justify-between px-6 py-4">
 
     <!-- Logo -->
     <div class="flex items-center">
-      <img
-        src="assets/logo-vera-noir.png"
-        alt="Vera"
-        class="h-26 w-auto"
-      />
+     <img
+  [src]="logoPath"
+  alt="Vera"
+  class="h-26 w-auto"
+/> 
     </div>
 
     <!-- Actions à droite -->
     <div class="flex items-center gap-4 text-sm">
-      <span class="text-xl">🌙</span>
+      <span class="text-xl" (click)="toggleDarkMode()">🌙</span>
       <span class="text-xl">⚙️</span>
       <button class="text-[24px] font-medium hover:underline">FAQ</button>
     </div>
