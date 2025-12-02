@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { VeraFooterComponent } from '../../shared/vera-footer/vera-footer.component';
+import { VeraHeaderComponent } from '../../shared/vera-header/vera-header.component';
 
 @Component({
   selector: 'app-index',
   standalone: true,
-  imports: [FormsModule, HttpClientModule],
+  imports: [FormsModule, HttpClientModule, VeraHeaderComponent, VeraFooterComponent ],
   templateUrl: './form.html',
   styleUrls: ['./form.css']
 })

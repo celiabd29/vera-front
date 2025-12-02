@@ -1,8 +1,14 @@
+<app-vera-header></app-vera-header>
+
+<div class="max-w-4xl mx-auto px-6 py-10">
+  <h1 class="text-3xl font-bold mb-4">Authentification</h1>
+</div>
+
 <form (ngSubmit)="login()" #loginForm="ngForm" class="max-w-sm mx-auto mt-10">
   <div class="mb-5">
     <label for="email" class="block mb-2 text-sm font-medium">Email</label>
     <input type="email" id="email" [(ngModel)]="email" name="email" 
-    class="border rounded w-full px-3 py-2" placeholder="name@flowbite.com" required/>
+    class="border rounded w-full px-3 py-2" placeholder="veragroupe5dc@gmail.com" required/>
   </div>
   <div class="mb-5">
     <label for="password" class="block mb-2 text-sm font-medium">Mot de passe</label>
@@ -10,6 +16,8 @@
     class="border rounded w-full px-3 py-2" placeholder="••••••••"/>
   </div>
   <button type="submit"
-    class="bg-blue-600 text-white rounded px-4 py-2 hover:bg-blue-700"> Se connecter 
+    class="bg-gray-600 text-white rounded px-4 py-2 hover:bg-blue-700"> Se connecter 
   </button>
 </form>
+
+<app-vera-footer></app-vera-footer>
