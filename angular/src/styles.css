@@ -27,19 +27,6 @@ body {
   font-display: swap;
 }
 
-body.dark-theme {
-  background-color: #121212;
-  color: #f5f5f5;
-  font-family: 'Lastik';
-  src: url('/assets/fonts/lastik/Lastik-Regular.woff2') format('woff2'),
-    url('/assets/fonts/lastik/Lastik-Regular.woff') format('woff'),
-    url('/assets/fonts/lastik/Lastik-Regular.ttf') format('truetype'),
-    url('/assets/fonts/lastik/Lastik-Regular.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 /* Utilitaires de font perso */
 .font-lastik {
   font-family: 'Lastik', sans-serif;
