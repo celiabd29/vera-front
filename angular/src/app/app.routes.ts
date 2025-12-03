@@ -6,12 +6,14 @@ import { DashboardComponent } from './pages/dashboard/dashboard';
 import { AuthGuard } from '../guard';
 import { MentionLegaleComponent } from './pages/mention-legale/mention-legale';
 import { PolitiqueConfidentialiteComponent } from './pages/politique-confidentialite/politique-confidentialite';
+import { CreateComponent } from './pages/create/create';
 
 // routes, les navigations
 export const routes: Routes = [
   { path: '', component: AccueilComponent },
   { path: 'chat', component: ChatComponent },
   { path: 'form', component: IndexComponent },
+  { path: 'create', component: CreateComponent},
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'mention-legale', component: MentionLegaleComponent },
   { path: 'politique-confidentialite', component: PolitiqueConfidentialiteComponent },

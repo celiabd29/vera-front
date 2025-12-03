@@ -1,25 +1,29 @@
 <app-vera-header></app-vera-header>
 
 <div class="max-w-4xl mx-auto px-6 py-10">
-  <h1 class="text-3xl font-bold mb-4">Authentification</h1>
+  <h1 class="text-3xl font-bold mb-4">Créer un compte</h1>
 </div>
 
-<form (ngSubmit)="login()" #loginForm="ngForm" class="max-w-sm mx-auto mt-10">
+<form (ngSubmit)="create()" #loginForm="ngForm" class="max-w-sm mx-auto mt-10">
   <div class="mb-5">
     <label for="email" class="block mb-2 text-sm font-medium">Email</label>
     <input type="email" id="email" [(ngModel)]="email" name="email" 
     class="border rounded w-full px-3 py-2" placeholder="veragroupe5dc@gmail.com" required/>
   </div>
   <div class="mb-5">
+  <label for="full_name" class="block mb-2 text-sm font-medium">Nom complet</label>
+  <input type="text" id="full_name" [(ngModel)]="full_name" name="full_name"
+    class="border rounded w-full px-3 py-2" placeholder="CCE" required/>
+  </div>
+  <div class="mb-5">
     <label for="password" class="block mb-2 text-sm font-medium">Mot de passe</label>
     <input type="password" id="password" [(ngModel)]="password" name="password" 
     class="border rounded w-full px-3 py-2" placeholder="••••••••"/>
   </div>
-  <div class="flex flex-wrap">
-    <a routerLink="/create" class="hover:underline"> Créer un compte ? </a>
-  </div>
+  
+
   <button type="submit"
-    class="bg-gray-600 text-white rounded px-4 py-2 hover:bg-blue-700"> Se connecter 
+    class="bg-gray-600 text-white rounded px-4 py-2 hover:bg-blue-700"> Créer le compte
   </button>
 </form>
 
