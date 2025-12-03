@@ -11,25 +11,25 @@ import { VeraHeaderComponent } from '../../shared/vera-header/vera-header.compon
   styleUrls: ['./mention-legale.css']
 })
 export class MentionLegaleComponent {
-  editeur: string = "";
-  statut : string = "";
+  editeur: string = "LAREPONSE.TECH";
+  statut : string = "Organisation Non Gouvernementale";
   CS : string = "";
-  adresse1 : string = "";
+  adresse1 : string = "52 rue du Faubourg Poissonnière, 75010 Paris";
   tel1 : string = "";
-  email : string = "";
+  email : string = "contact@lareponse.tech";
   siret : string = "";
   rcsrm : string = "";
-  tva : string = "";
-  directeur : string = "";
+  tva : string = "20%";
+  directeur : string = "Florian GAUTHIER";
 
-  hebergeur : string = "Vercel";
-  adresse2 : string = "";
+  hebergeur : string = "Vercel Inc.";
+  adresse2 : string = "340 S Lemon Ave #4133, Walnut, CA 91789";
   tel2 : string = "";
-  site : string = "";
+  site : string = "https://vercel.com";
 
-  demande : string = "";
-  contact : string = "";
-  adressePost : string = "";
+  demande : string = "https://www.cnil.fr";
+  contact : string = "CNIL";
+  adressePost : string = "3 Pl. de Fontenoy-Unesco, 75007 Paris";
 
 
 }

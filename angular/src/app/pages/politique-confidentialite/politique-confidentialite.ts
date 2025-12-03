@@ -9,8 +9,8 @@ import { VeraHeaderComponent } from '../../shared/vera-header/vera-header.compon
   templateUrl: './politique-confidentialite.html'
 })
 export class PolitiqueConfidentialiteComponent {
-  Nom: string = "";
+  Nom: string = "VERA WEB";
   adresse1: string ="";
   tel1: string ="";
-  representant: string ="";
+  representant: string ="Florian GAUTHIER";
 }
