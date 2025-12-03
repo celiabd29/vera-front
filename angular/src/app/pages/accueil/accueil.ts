@@ -23,6 +23,7 @@ declare var webkitSpeechRecognition: any;
 })
 export class AccueilComponent {
   homeQuestion: string = '';
+
   constructor(private router: Router, private ngZone: NgZone) {}
 
   redirectToChat(text: string) {
@@ -40,9 +41,11 @@ export class AccueilComponent {
     }
   }
 
+  // --- Commande vocale ---
   isRecording = false;
   private recognition: any = null;
   currentQuestion = '';
+
   async startVoiceCommand() {
     console.log('startVoiceCommand() appelé');
 
@@ -68,6 +71,13 @@ export class AccueilComponent {
 
         this.ngZone.run(() => {
           this.homeQuestion = transcript;
+
+          const text = transcript.trim();
+          if (text) {
+            // 👉 même comportement que si tu cliquais sur envoyer :
+            // redirection vers /chat?q=... puis envoi auto géré par ChatComponent.ngOnInit()
+            this.redirectToChat(text);
+          }
         });
       };
 

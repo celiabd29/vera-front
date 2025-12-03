@@ -250,7 +250,6 @@ export class ChatComponent implements AfterViewInit {
       };
     }
 
-    // Si c’est déjà en train d’enregistrer, on ne fait rien
     if (this.isRecording) {
       console.log('Déjà en enregistrement, on ignore le clic');
       return;
