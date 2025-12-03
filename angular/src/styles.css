@@ -1,6 +1,6 @@
 /* IMPORTS */
-@import "tailwindcss";
-@import "flowbite/src/themes/default";
+@import 'tailwindcss';
+@import 'flowbite/src/themes/default';
 
 /* TAILWIND LAYERS */
 @tailwind base;
@@ -11,20 +11,30 @@
 @plugin "flowbite/plugin";
 @source "../node_modules/flowbite";
 
-
 body {
   background-color: #ffffff;
   color: #000000;
 }
 
+@font-face {
+  font-family: 'Lastik';
+  src: url('/assets/fonts/lastik/Lastik-Regular.woff2') format('woff2'),
+    url('/assets/fonts/lastik/Lastik-Regular.woff') format('woff'),
+    url('/assets/fonts/lastik/Lastik-Regular.ttf') format('truetype'),
+    url('/assets/fonts/lastik/Lastik-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 body.dark-theme {
   background-color: #121212;
   color: #f5f5f5;
-  font-family: "Lastik";
-  src: url("/assets/fonts/lastik/Lastik-Regular.woff2") format("woff2"),
-       url("/assets/fonts/lastik/Lastik-Regular.woff") format("woff"),
-       url("/assets/fonts/lastik/Lastik-Regular.ttf") format("truetype"),
-       url("/assets/fonts/lastik/Lastik-Regular.otf") format("opentype");
+  font-family: 'Lastik';
+  src: url('/assets/fonts/lastik/Lastik-Regular.woff2') format('woff2'),
+    url('/assets/fonts/lastik/Lastik-Regular.woff') format('woff'),
+    url('/assets/fonts/lastik/Lastik-Regular.ttf') format('truetype'),
+    url('/assets/fonts/lastik/Lastik-Regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -32,9 +42,100 @@ body.dark-theme {
 
 /* Utilitaires de font perso */
 .font-lastik {
-  font-family: "Lastik", sans-serif;
+  font-family: 'Lastik', sans-serif;
 }
 
 .font-fustat {
-  font-family: "Fustat", system-ui, sans-serif;
+  font-family: 'Fustat', system-ui, sans-serif;
+}
+
+/* Style des petites “bulles” de questions */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.9rem;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  line-height: 1.2;
+  background-color: #f4f4f5; /* équiv. slate-100 */
+  color: #0f172a; /* équiv. slate-900 */
+  border: 1px solid #e5e7eb; /* équiv. gray-200 */
+}
+/* Cartes questions style maquette */
+.question-card {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start; /* important */
+  gap: 1.5rem;
+  padding: 1.5rem 2.5rem;
+  border-radius: 8px;
+  background-color: #121822;
+  min-width: 260px;
+  max-width: 420px;
+  text-align: left !important;
+}
+
+/* Guillemet */
+.quote-mark {
+  font-family: var(
+    --font-fustat,
+    'Fustat',
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif
+  );
+  font-size: 88px; /* Fustat 88px */
+  line-height: 0.8;
+  color: #ffffff;
+  transform: translateY(-4px); /* petit ajustement vertical */
+}
+
+/* Texte de la question */
+.question-text {
+  font-family: var(
+    --font-fustat,
+    'Fustat',
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif
+  );
+  font-size: 18px; /* Fustat 18px */
+  line-height: 1.4;
+  color: #f9fafb;
+  white-space: nowrap;
+}
+
+/* Sliders (on garde ce qu'on avait) */
+.marquee-row {
+  display: inline-flex;
+  white-space: nowrap;
+  min-width: 100%;
+}
+
+.marquee-left {
+  animation: marquee-left 25s linear infinite;
+}
+
+.marquee-right {
+  animation: marquee-right 25s linear infinite;
+}
+
+@keyframes marquee-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }

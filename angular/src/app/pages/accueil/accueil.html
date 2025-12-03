@@ -3,7 +3,7 @@
 
 <!-- HERO SECTION -->
 <section
-  class="relative w-full h-screen flex flex-col items-center justify-center text-center overflow-hidden"
+  class="relative w-full min-h-[100vh] sm:min-h-[120vh] flex flex-col items-center justify-center text-center overflow-hidden"
 >
   <!-- Background -->
   <div
@@ -12,10 +12,28 @@
   ></div>
 
   <!-- Overlay sombre -->
-  <div class="absolute inset-0 bg-black/40"></div>
+  <div class="absolute inset-0 bg-black/40 z-0"></div>
 
-  <!-- Texte -->
-  <div class="relative z-10 flex flex-col items-center px-6 mt-[5rem]">
+  <!-- FONDU vers blanc (INTÉGRÉ au hero) -->
+  <div
+    class="absolute inset-x-0 bottom-0 h-25 bg-gradient-to-b from-transparent via-white/70 to-white z-10 pointer-events-none"
+  ></div>
+
+  <!-- Chevron -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20">
+    <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M8.5 12.75L17 21.25L25.5 12.75"
+        stroke="white"
+        stroke-width="2.83333"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  </div>
+
+  <!-- Texte + barre de recherche -->
+  <div class="relative z-20 flex flex-col items-center px-6 mt-[5rem]">
     <h1 class="font-lastik font-normal text-[48px] sm:text-[60px] lg:text-[78px] text-white mb-2">
       Garde la flemme
     </h1>
@@ -26,11 +44,10 @@
       On s’occupe du reste.
     </p>
 
-    <!-- Barre de recherche / input -->
     <!-- Barre de recherche -->
     <div class="w-full flex justify-center px-4 sm:px-0">
       <div
-        class="flex items-center gap-[10px] w-[387px] /* mobile */ sm:w-[550px] /* intermédiaire */ md:w-[787px] /* desktop */ h-[42px] sm:h-[46px] md:h-[49px] bg-white border border-[#E5E5E5] rounded-[100px] px-[12px] py-[3px]"
+        class="flex items-center gap-[8px] w-[320px] h-[40px] text-sm sm:w-[550px] sm:h-[44px] md:w-[787px] md:h-[49px] bg-white border border-[#E5E5E5] rounded-[100px] px-[10px] py-[2px]"
       >
         <!-- Bouton + -->
         <button
@@ -65,40 +82,6 @@
         />
 
         <!-- Micro -->
-        <!-- <button
-          type="button"
-          class="flex items-center justify-center h-7 w-7 sm:h-9 sm:w-9 rounded-full hover:bg-slate-100 transition"
-          aria-label="Commande vocale"
-        >
-          <svg
-            viewBox="0 0 43 43"
-            class="h-7 w-7 sm:h-9 sm:w-9 md:h-12 md:w-12"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M21.9561 27.331V29.8118"
-              stroke="#A5A5A5"
-              stroke-width="1.65385"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M27.7444 19.8887V21.5426C27.7444 23.0778 27.1345 24.5501 26.049 25.6356C24.9635 26.7212 23.4911 27.331 21.9559 27.331C20.4207 27.331 18.9484 26.7212 17.8629 25.6356C16.7773 24.5501 16.1675 23.0778 16.1675 21.5426V19.8887"
-              stroke="#A5A5A5"
-              stroke-width="1.65385"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M24.4369 15.7541C24.4369 14.384 23.3262 13.2733 21.9561 13.2733C20.586 13.2733 19.4753 14.384 19.4753 15.7541V21.5425C19.4753 22.9126 20.586 24.0233 21.9561 24.0233C23.3262 24.0233 24.4369 22.9126 24.4369 21.5425V15.7541Z"
-              stroke="#A5A5A5"
-              stroke-width="1.65385"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </button> -->
         <app-mic-button (micClick)="startVoiceCommand()"></app-mic-button>
 
         <!-- Envoyer -->
@@ -132,22 +115,603 @@
         </button>
       </div>
     </div>
-
-    <!-- Scroll icon -->
-    <div class="absolute bottom-5 left-1/2 -translate-x-1/2">
-      <span class="text-white text-2xl animate-bounce">⌄</span>
-    </div>
   </div>
 </section>
 
 <!-- CONTENU SUIVANT -->
-<main class="bg-white py-20">
-  <div class="max-w-4xl mx-auto px-6">
-    <h2 class="text-3xl font-bold mb-4 text-black">Bienvenue sur Vera</h2>
-    <p class="text-slate-600">
-      Vérifiez n'importe quelle information, par texte ou par commande vocale.
-    </p>
-  </div>
+<main>
+  <!-- Section sliders -->
+  <section class="py-10 sm:py-16">
+    <div class="space-y-8">
+      <!-- SLIDER 1 -->
+      <div class="overflow-hidden">
+        <div class="marquee-row marquee-left flex gap-6">
+          <div class="flex gap-6">
+            <div class="question-card">
+              <span class="quote-mark">“</span>
+              <span class="question-text">Est ce que les canards sont verts ?</span>
+            </div>
+            <div class="question-card">
+              <span class="quote-mark">“</span>
+              <span class="question-text">Est ce que les canards sont verts ?</span>
+            </div>
+            <div class="question-card">
+              <span class="quote-mark">“</span>
+              <span class="question-text">Est ce que les canards sont verts ?</span>
+            </div>
+            <div class="question-card">
+              <span class="quote-mark">“</span>
+              <span class="question-text">Est ce que les canards sont verts ?</span>
+            </div>
+          </div>
+
+          <!-- duplication pour l'effet infini -->
+          <div class="flex gap-6">
+            <div class="question-card">
+              <span class="quote-mark">“</span>
+              <span class="question-text">Est ce que les canards sont verts ?</span>
+            </div>
+            <div class="question-card">
+              <span class="quote-mark">“</span>
+              <span class="question-text">Est ce que les canards sont verts ?</span>
+            </div>
+            <div class="question-card">
+              <span class="quote-mark">“</span>
+              <span class="question-text">Est ce que les canards sont verts ?</span>
+            </div>
+            <div class="question-card">
+              <span class="quote-mark">“</span>
+              <span class="question-text">Est ce que les canards sont verts ?</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDER 2 -->
+      <div class="overflow-hidden">
+        <div class="marquee-row marquee-right flex gap-6">
+          <div class="flex gap-6">
+            <div class="question-card">
+              <span class="quote-mark">“</span>
+              <span class="question-text">Cette vidéo TikTok est vraie ?</span>
+            </div>
+            <div class="question-card">
+              <span class="quote-mark">“</span>
+              <span class="question-text">Est-ce que ce mail est un scam ?</span>
+            </div>
+            <div class="question-card">
+              <span class="quote-mark">“</span>
+              <span class="question-text">Cette rumeur circule partout… vraie ou fausse ?</span>
+            </div>
+            <div class="question-card">
+              <span class="quote-mark">“</span>
+              <span class="question-text">C’est une fake news ou pas ?</span>
+            </div>
+          </div>
+
+          <!-- duplication -->
+          <div class="flex gap-6">
+            <div class="question-card">
+              <span class="quote-mark">“</span>
+              <span class="question-text">Cette vidéo TikTok est vraie ?</span>
+            </div>
+            <div class="question-card">
+              <span class="quote-mark">“</span>
+              <span class="question-text">Est-ce que ce mail est un scam ?</span>
+            </div>
+            <div class="question-card">
+              <span class="quote-mark">“</span>
+              <span class="question-text">Cette rumeur circule partout… vraie ou fausse ?</span>
+            </div>
+            <div class="question-card">
+              <span class="quote-mark">“</span>
+              <span class="question-text">C’est une fake news ou pas ?</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDER 3 -->
+      <div class="overflow-hidden">
+        <div class="marquee-row marquee-left flex gap-6">
+          <div class="flex gap-6">
+            <div class="question-card">
+              <span class="quote-mark">“</span>
+              <span class="question-text">Ce chiffre sur l’inflation est fiable ?</span>
+            </div>
+            <div class="question-card">
+              <span class="quote-mark">“</span>
+              <span class="question-text">Cette info santé est exacte ?</span>
+            </div>
+            <div class="question-card">
+              <span class="quote-mark">“</span>
+              <span class="question-text">Cette vidéo est sortie de son contexte ?</span>
+            </div>
+            <div class="question-card">
+              <span class="quote-mark">“</span>
+              <span class="question-text">Ce graphique que j’ai vu, c’est du vrai ?</span>
+            </div>
+          </div>
+
+          <!-- duplication -->
+          <div class="flex gap-6">
+            <div class="question-card">
+              <span class="quote-mark">“</span>
+              <span class="question-text">Ce chiffre sur l’inflation est fiable ?</span>
+            </div>
+            <div class="question-card">
+              <span class="quote-mark">“</span>
+              <span class="question-text">Cette info santé est exacte ?</span>
+            </div>
+            <div class="question-card">
+              <span class="quote-mark">“</span>
+              <span class="question-text">Cette vidéo est sortie de son contexte ?</span>
+            </div>
+            <div class="question-card">
+              <span class="quote-mark">“</span>
+              <span class="question-text">Ce graphique que j’ai vu, c’est du vrai ?</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- SECTION 1 & 2 : "Posez une question" / "Vera, l’assistante connectée" -->
+  <section class="bg-[#B9CFFF] py-12 sm:py-20 px-6 sm:px-10">
+    <div class="max-w-6xl mx-auto space-y-20">
+      <!-- BLOC 1 -->
+      <div class="grid md:grid-cols-2 gap-12 md:items-center">
+        <!-- Texte + déco -->
+        <div class="relative space-y-4">
+          <!-- SVG déco haut-gauche -->
+          <svg
+            class="absolute -top-18 -left-6 w-12 sm:top-6 sm:left-6 sm:w-16 md:-top-20 md:-left-12 md:w-20 /* DESKTOP maquette */"
+            width="114"
+            height="140"
+            viewBox="0 0 114 140"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g clip-path="url(#clip0_325_205)">
+              <path
+                d="M71.4314 34.294C71.926 34.657 72.4022 38.0913 72.6681 43.1962C73.546 60.6543 74.6192 60.1002 73.2593 61.0136C71.8038 61.9914 71.6536 61.3137 70.5537 50.0949C69.3799 38.0636 69.6459 33.0463 71.4314 34.294Z"
+                fill="#121822"
+              />
+              <path
+                d="M87.0364 54.7059C87.4528 54.7876 87.4608 55.0885 87.2243 56.6377C86.8567 58.9425 85.054 61.0156 84.3449 59.9624C83.784 59.0879 86.1072 54.5237 87.0364 54.7059Z"
+                fill="#121822"
+              />
+              <path
+                d="M94.2962 58.7553C101.465 49.4905 104.148 46.576 105.677 46.4938C106.926 46.4062 106.647 47.1494 104.564 49.4667C102.767 51.4245 99.659 55.2363 96.6923 59.0923C94.2605 62.2554 93.6101 62.8591 92.51 63.1254C90.9812 63.4572 91.3804 62.5215 94.2962 58.7553Z"
+                fill="#121822"
+              />
+              <path
+                d="M53.1956 39.8412C53.6774 40.1851 55.6396 45.207 56.5954 48.486C56.8229 49.2786 57.5618 51.285 58.2222 52.9271C59.5297 56.1088 59.5371 56.3265 58.4455 57.0599C57.4114 57.7546 57.437 57.7927 55.5365 52.284C52.2221 42.6918 51.455 38.619 53.1956 39.8412Z"
+                fill="#121822"
+              />
+              <path
+                d="M89.3547 44.7222C88.7824 47.0533 89.1091 48.5301 87.6919 49.4822C85.4129 51.0131 85.214 50.9243 86.0901 46.359C87.7109 37.9009 90.1653 31.1356 91.6378 31.0919C93.0528 31.0868 90.9229 35.938 89.3547 44.7222Z"
+                fill="#121822"
+              />
+              <path
+                d="M17.1769 87.146C14.8963 86.8982 13.0879 86.2776 12.6239 85.5883C11.9793 84.6308 12.9733 83.5457 14.4911 83.6107C24.5645 83.9906 36.2486 86.5979 35.776 88.3335C35.3098 90.0371 33.6899 90.0685 25.4875 88.543C21.8733 87.884 18.1377 87.2513 17.1769 87.146Z"
+                fill="#121822"
+              />
+              <path
+                d="M33.5618 53.8087C35.4574 55.3439 39.1384 59.4897 48.0163 67.5136C49.7842 69.1069 49.8098 69.1451 49.5837 70.1312C49.3951 70.9252 48.5537 71.741 47.8686 71.7562C47.2989 71.7775 35.077 60.5216 31.2043 56.4212C29.7244 54.8013 31.3962 52.0376 33.5618 53.8087Z"
+                fill="#121822"
+              />
+              <path
+                d="M13.8891 100.896C20.8069 98.6124 34.2915 95.7553 35.5425 96.333C36.4151 96.7202 35.1489 98.5163 33.729 98.886L28.427 100.223C20.2724 102.28 9.87011 104.263 9.57362 103.822C8.98692 102.909 10.1553 102.125 13.8891 100.896Z"
+                fill="#121822"
+              />
+              <path
+                d="M21.641 67.128C22.3404 67.4646 24.3354 68.3213 30.0305 70.4188C32.6087 71.3566 37.4084 73.6941 37.7178 74.1537C38.3365 75.0728 33.592 73.6437 24.8691 70.2708C22.9834 69.5354 21.1622 68.8956 20.8034 68.8585C19.1377 68.6149 20.332 66.5056 21.641 67.128Z"
+                fill="#121822"
+              />
+            </g>
+            <defs>
+              <clipPath id="clip0_325_205">
+                <rect
+                  width="117.909"
+                  height="72.4975"
+                  fill="white"
+                  transform="matrix(-0.408418 0.912795 -0.895395 -0.445273 113.07 32.2812)"
+                />
+              </clipPath>
+            </defs>
+          </svg>
+
+          <h2 class="font-lastik text-[32px] sm:text-[48px] text-[#121822]">
+            Posez une question à Vera.
+          </h2>
+
+          <p class="font-fustat text-[18px] sm:text-[20px] text-[#283548] leading-relaxed">
+            Un doute ? Écrivez-le dans le chat.<br />
+            Vera le transforme instantanément en réponse factuelle.
+          </p>
+        </div>
+
+        <!-- Carte mock chat -->
+        <div class="flex justify-center md:justify-end">
+          <img src="/assets/dark-mode1.png" alt="vera dark mode" />
+        </div>
+      </div>
+
+      <!-- BLOC 2 -->
+      <div class="grid md:grid-cols-2 gap-12 md:items-center">
+        <!-- Texte + déco -->
+        <div class="relative space-y-4">
+          <h2 class="font-lastik text-[32px] sm:text-[48px] text-[#121822]">
+            Vera, l’assistante connectée.
+          </h2>
+
+          <p class="font-fustat text-[18px] sm:text-[20px] text-[#283548] leading-relaxed max-w-xl">
+            Vera est connectée en temps réel à plus de 400 sites de fact-checking pour garantir une
+            information fiable et vérifiée.
+          </p>
+
+          <!-- SVG déco bas-droite -->
+          <svg
+            class="absolute -bottom-14 right-6 w-14 sm:bottom-8 sm:right-8 sm:w-18 md:-bottom-18 md:-right-12 md:w-24"
+            width="123"
+            height="144"
+            viewBox="0 0 123 144"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g clip-path="url(#clip0_325_220)">
+              <path
+                d="M45.5674 105.163C45.0636 104.859 44.247 101.501 43.4484 96.4589C40.7472 79.2136 39.7982 79.8861 40.9779 78.8241C42.2407 77.6872 42.4546 78.3435 44.6941 89.3647C47.0902 101.185 47.3795 106.2 45.5674 105.163Z"
+                fill="#121822"
+              />
+              <path
+                d="M28.7083 86.6565C28.3082 86.6227 28.2684 86.3246 28.3241 84.7586C28.4218 82.427 29.8932 80.1625 30.6727 81.1282C31.2939 81.9334 29.6012 86.732 28.7083 86.6565Z"
+                fill="#121822"
+              />
+              <path
+                d="M21.4504 83.4581C15.7094 93.4775 13.5015 96.6779 12.0726 96.9334C10.909 97.1623 11.0908 96.3923 12.7997 93.8533C14.278 91.7039 16.7888 87.5638 19.1624 83.3956C21.1078 79.9767 21.6541 79.303 22.6593 78.9134C24.0604 78.41 23.7859 79.385 21.4504 83.4581Z"
+                fill="#121822"
+              />
+              <path
+                d="M62.1082 97.5799C61.6185 97.293 59.2348 92.5266 57.9842 89.3775C57.6852 88.6158 56.7752 86.7064 55.9781 85.15C54.4074 82.1374 54.377 81.922 55.3241 81.0693C56.2212 80.2616 56.1931 80.2266 58.5711 85.4837C62.7168 94.6372 63.8753 98.5965 62.1082 97.5799Z"
+                fill="#121822"
+              />
+              <path
+                d="M27.6025 96.839C27.8898 94.458 27.4241 93.0278 28.6536 91.9209C30.6308 90.141 30.8272 90.2066 30.4945 94.8418C29.8804 103.429 28.3009 110.43 26.9219 110.64C25.5926 110.806 27.0728 105.744 27.6025 96.839Z"
+                fill="#121822"
+              />
+              <path
+                d="M90.8732 46.4888C93.043 46.476 94.8092 46.887 95.3193 47.5192C96.028 48.3972 95.2105 49.5882 93.7772 49.6961C84.2697 50.4632 73.0092 49.2004 73.2667 47.4223C73.5218 45.6768 75.0407 45.4616 82.913 46.0452C86.3803 46.2892 89.9589 46.4934 90.8732 46.4888Z"
+                fill="#121822"
+              />
+              <path
+                d="M79.0582 81.4722C77.1117 80.1623 73.207 76.4616 64.0014 69.4984C62.1688 68.1162 62.1406 68.0812 62.2472 67.0758C62.3391 66.2655 63.0421 65.3594 63.6843 65.2664C64.2174 65.1806 76.9128 74.9749 80.9929 78.6087C82.5577 80.05 81.2837 82.9858 79.0582 81.4722Z"
+                fill="#121822"
+              />
+              <path
+                d="M92.4853 32.4547C86.2296 35.5092 73.8644 39.88 72.6266 39.4481C71.765 39.1626 72.7619 37.2342 74.0565 36.7056L78.8954 34.7748C86.3377 31.8042 95.9004 28.6529 96.2263 29.0568C96.8758 29.8971 95.8622 30.8093 92.4853 32.4547Z"
+                fill="#121822"
+              />
+              <path
+                d="M88.8292 66.8845C88.1357 66.6294 86.1688 66.005 80.5913 64.5681C78.0677 63.9294 73.3059 62.1524 72.9657 61.7309C72.2855 60.888 76.8978 61.7688 85.4578 64.1287C87.3089 64.6451 89.0892 65.0738 89.4303 65.0699C91.0219 65.1227 90.1262 67.354 88.8292 66.8845Z"
+                fill="#121822"
+              />
+            </g>
+            <defs>
+              <clipPath id="clip0_325_220">
+                <rect
+                  width="118.352"
+                  height="91.3546"
+                  fill="white"
+                  transform="matrix(0.305386 -0.952229 0.941352 0.337427 0 112.698)"
+                />
+              </clipPath>
+            </defs>
+          </svg>
+        </div>
+
+        <!-- Carte mock chat 2 -->
+        <div class="flex justify-center md:justify-end">
+          <img src="/assets/dark-mode2.png" alt="vera dark mode" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 : "Nous sommes une ONG" -->
+  <section class="bg-white py-16 sm:py-24 px-4">
+    <div class="max-w-3xl mx-auto text-center space-y-6">
+      <h2 class="font-lastik text-[32px] sm:text-[50px] text-[#121822]">Nous sommes une ONG</h2>
+      <p class="font-fustat text-[16px] sm:text-[20px] text-[#4B5563] leading-relaxed">
+        LaReponse.tech est un collectif de citoyennes et citoyens de la tech réunissant une
+        expérience significative dans les projets à impact social.
+      </p>
+
+      <button
+        type="button"
+        class="inline-flex items-center justify-center rounded-full border border-[#121822] px-6 sm:px-8 py-2.5 font-fustat text-[14px] sm:text-[15px] text-[#121822] hover:bg-[#121822] hover:text-white transition"
+      >
+        En savoir plus
+      </button>
+    </div>
+  </section>
+
+  <!-- SECTION FAQ -->
+  <section class="relative bg-[#121822] text-white py-16 sm:py-24 px-4 overflow-hidden">
+    <!-- Taches décoratives en fond -->
+    <svg
+      class="pointer-events-none absolute -top-32 -left-40 w-[1100px] z-0"
+      viewBox="0 0 751 554"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        d="M206.709 123.554C199.217 132.204 179.953 125.639 175.877 115.204C171.377 103.656 168.386 71.3397 184.289 67.2455C206.77 61.4632 216.669 112.064 206.733 123.552L206.709 123.554Z"
+        fill="#B4D2FF"
+      />
+      <path
+        d="M276.99 33.1171C306.466 25.0552 284.559 99.0916 265.865 98.8166C240.946 98.425 261.251 37.4426 276.99 33.1171Z"
+        fill="#B4D2FF"
+      />
+      <path
+        d="M461.415 34.8391C468.107 43.1046 432.296 70.0081 425.719 74.619C418.7 79.5066 402.65 93.9637 395.781 82.6913C387.131 68.4839 428.844 36.7522 442.37 34.1034C445.997 33.3922 459.774 32.7947 461.439 34.8373L461.415 34.8391Z"
+        fill="#B4D2FF"
+      />
+      <path
+        d="M315.3 150.317C341.237 144.47 319.429 191.292 312.845 200.994C310.058 205.101 300.256 218.041 295.105 216.967C279.528 213.729 292.096 155.545 315.3 150.317Z"
+        fill="#B4D2FF"
+      />
+      <path
+        d="M393.983 139.846C411.498 136.435 404.088 151.679 398.273 160.593C393.596 167.764 364.072 200.479 357.503 200.657C349.988 200.881 347.894 194.754 349.244 188.076C352.032 174.251 379.906 142.61 394.009 139.869L393.983 139.846Z"
+        fill="#B4D2FF"
+      />
+      <path
+        d="M129.073 204.387C128.776 204.969 118.851 209.783 117.187 210.03C106.792 211.518 61.9101 189.756 64.1214 179.287C67.8202 161.691 124.555 188.383 128.419 197.299C129.247 199.234 130.011 202.587 129.073 204.387Z"
+        fill="#B4D2FF"
+      />
+      <path
+        d="M36.0379 298.264C44.2001 296.262 95.0367 291.197 95.7851 301.152C88.71 316.639 30.725 322.923 22.0459 315.781C12.8474 308.216 29.8379 299.777 36.0379 298.264Z"
+        fill="#B4D2FF"
+      />
+      <path
+        d="M112.334 430.145C118.443 437.797 89.4659 451.521 84.5047 453.623C77.7261 456.52 24.3145 475.32 42.5336 453.393C49.7756 444.664 105.391 421.46 112.334 430.145Z"
+        fill="#B4D2FF"
+      />
+      <path
+        d="M480.466 166.957C486.315 174.068 457.912 190.233 452.883 192.73C403.348 217.377 400.379 193.463 444.673 173.034C456.643 167.53 466.915 162.788 480.464 166.933L480.466 166.957Z"
+        fill="#B4D2FF"
+      />
+      <path
+        d="M552.741 78.3916C557.389 77.6281 585.668 74.4057 579.844 84.8057C575.31 92.9165 521.608 109.157 512.18 106.968C510.369 106.544 505.583 104.175 505.136 102.772C501.996 92.778 544.675 79.7288 552.741 78.3916Z"
+        fill="#B4D2FF"
+      />
+      <path
+        d="M353.332 326.726C356.406 329.686 362.207 336.8 361.052 341.223C353.768 357.822 304.821 337.754 307.887 317.258C308.555 312.848 324.516 311.794 328.756 312.425C332.997 313.056 350.099 323.608 353.332 326.726Z"
+        fill="#B4D2FF"
+      />
+      <path
+        d="M252.97 439.251C248.619 445.254 197.775 465.785 191.42 464.583C189.787 464.267 184.967 460.464 184.914 459.762C184.282 451.358 240.873 421.016 252.883 427.396C257.031 429.715 255.116 436.338 252.972 439.275L252.97 439.251Z"
+        fill="#B4D2FF"
+      />
+      <path
+        d="M558.069 233.536C556.911 235.328 526.1 242.491 521.343 243.093C514.824 243.924 475.026 246.989 476.638 236.321C478.392 224.644 541.382 222.027 552.389 226.729C554.68 227.701 560.105 230.46 558.071 233.56L558.069 233.536Z"
+        fill="#B4D2FF"
+      />
+      <path
+        d="M186.442 277.773C195.564 274.261 227.279 288.196 230.737 296.583C234.823 306.506 221.47 311.455 213.516 311.688C196.465 312.191 168.554 284.647 186.467 277.771L186.442 277.773Z"
+        fill="#B4D2FF"
+      />
+      <path
+        d="M647.152 158.418C641.275 164.56 582.37 178.707 573.584 167.871C572.92 160.663 617.937 147.584 625.372 146.928C632.033 146.354 655.968 149.23 647.128 158.42L647.152 158.418Z"
+        fill="#B4D2FF"
+      />
+      <path
+        d="M668.751 325.394C679.28 322.776 722.87 325.734 732.621 330.92C735.135 332.265 738.529 332.984 738.217 336.612C737.527 341.706 713.39 342.303 707.938 342.421C700.392 342.574 656.962 341.09 656.386 333.753C659.321 329.343 663.679 326.677 668.752 325.419L668.751 325.394Z"
+        fill="#B4D2FF"
+      />
+      <path
+        d="M135.473 503.474C139.412 502.691 146.46 503.379 147.16 507.832C148.521 516.523 103.601 547.107 94.5852 548.783C85.5697 550.46 86.6525 544.435 89.9988 538.362C95.7916 527.867 123.896 505.781 135.473 503.474Z"
+        fill="#B4D2FF"
+      />
+      <path
+        d="M206.694 215.114C221.125 211.861 256.882 238.06 243.106 250.665C234.392 258.627 221.861 249.535 215.074 243.566C208.287 237.597 190.273 218.808 206.696 215.138L206.694 215.114Z"
+        fill="#B4D2FF"
+      />
+      <path
+        d="M620.378 369.391C621.243 370.52 621.057 374.528 619.989 376.216C614.414 385.063 555.913 374.116 546.909 368.168C542.55 365.305 545.444 360.021 550.486 358.668C559.709 356.196 615.808 363.402 620.402 369.389L620.378 369.391Z"
+        fill="#B4D2FF"
+      />
+      <path
+        d="M594.283 296.285C589.457 299.863 530.378 299.385 523.215 295.222C518.499 292.483 523.032 286.955 526.24 285.203C535.745 279.983 593.955 280.575 595.883 290.66C595.929 290.948 594.536 296.095 594.307 296.283L594.283 296.285Z"
+        fill="#B4D2FF"
+      />
+      <path
+        d="M714.684 264.848C715.413 265.791 715.253 270.139 714.206 271.777C709.631 279.014 650.074 283.199 643.858 274.776C642.662 273.137 641.708 268.873 642.327 268.023C645.1 264.063 710.183 259.121 714.686 264.872L714.684 264.848Z"
+        fill="#B4D2FF"
+      />
+      <path
+        d="M230.158 369.284C237.924 393.787 171.382 393.578 170.336 386.155C171.824 370.284 225.429 364.427 230.158 369.284Z"
+        fill="#B4D2FF"
+      />
+      <path
+        d="M447.73 342.086C452.495 341.581 470.443 343.617 466.063 351.497C462.799 357.369 420.625 371.306 413.007 371.465C410.402 371.515 405.642 371.093 404.882 368.447C402.16 359.152 439.773 342.927 447.73 342.086Z"
+        fill="#B4D2FF"
+      />
+      <path
+        d="M286.994 369.443C295.242 366.314 353.078 367.129 351.239 379.3C341.866 390.162 323.758 386.335 311.19 384.211C302.202 382.695 286.815 381.659 286.996 369.467L286.994 369.443Z"
+        fill="#B4D2FF"
+      />
+      <path
+        d="M329.843 403.074C335.875 401.914 368.837 399.046 367.135 409.793C365.737 418.764 316.506 424.756 308.86 418.705C298.802 410.742 324.94 404.002 329.843 403.074Z"
+        fill="#B4D2FF"
+      />
+      <path
+        d="M492.653 390.321C498.101 397.608 481.444 401.734 476.692 402.725C468.51 404.461 436.129 408.576 432.267 400.341C430.44 396.46 440.422 393.371 442.879 392.65C450.842 390.274 488.18 384.324 492.653 390.321Z"
+        fill="#B4D2FF"
+      />
+      <path
+        d="M400.579 321.59C396.296 326.224 382.943 334.73 377.936 328.773C369.533 318.81 408.02 278.869 411.057 297.858C411.898 303.202 404.347 317.556 400.605 321.613L400.579 321.59Z"
+        fill="#B4D2FF"
+      />
+    </svg>
+
+    <!-- Contenu FAQ -->
+    <div class="relative z-10 max-w-6xl mx-auto">
+      <h2 class="text-center font-lastik text-[34px] sm:text-[50px] mb-10">FAQ</h2>
+
+      <div class="space-y-4 w-full">
+        <!-- Item 1 -->
+        <details class="group bg-white rounded-full px-8 py-4 text-[#121822] w-full">
+          <summary
+            class="flex items-center justify-between cursor-pointer list-none font-fustat text-[14px] sm:text-[15px]"
+          >
+            <span>À quoi sert Vera ?</span>
+            <span class="ml-4 text-xl leading-none text-[#4B5563]"
+              ><svg
+                width="28"
+                height="28"
+                viewBox="0 0 34 34"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8.5 12.75L17 21.25L25.5 12.75"
+                  stroke="black"
+                  stroke-width="2.83333"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+          </summary>
+          <div class="mt-3 pt-1 text-[13px] sm:text-[14px] text-[#4B5563]">
+            Vera t’aide à trier le vrai du faux sans quitter ton écran ni ouvrir dix onglets.
+          </div>
+        </details>
+
+        <!-- Item 2 -->
+        <details class="group bg-white rounded-full px-8 py-4 text-[#121822] w-full">
+          <summary
+            class="flex items-center justify-between cursor-pointer list-none font-fustat text-[14px] sm:text-[15px]"
+          >
+            <span>Comment les informations sont vérifiées ?</span>
+            <span class="ml-4 text-xl leading-none text-[#4B5563]">
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 34 34"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8.5 12.75L17 21.25L25.5 12.75"
+                  stroke="black"
+                  stroke-width="2.83333"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+          </summary>
+          <div class="mt-3 pt-1 text-[13px] sm:text-[14px] text-[#4B5563]">
+            Propulsée par une intelligence artificielle (GPT-4), Vera consulte plus de 300 sources
+            fiables, incluant des sites de fact-checking spécialisés et des médias reconnus.
+          </div>
+        </details>
+
+        <!-- Item 3 -->
+        <details class="group bg-white rounded-full px-8 py-4 text-[#121822] w-full">
+          <summary
+            class="flex items-center justify-between cursor-pointer list-none font-fustat text-[14px] sm:text-[15px]"
+          >
+            <span>Où utiliser Vera ?</span>
+            <span class="ml-4 text-xl leading-none text-[#4B5563]">
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 34 34"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8.5 12.75L17 21.25L25.5 12.75"
+                  stroke="black"
+                  stroke-width="2.83333"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+          </summary>
+          <div class="mt-3 pt-1 text-[13px] sm:text-[14px] text-[#4B5563]">
+            Directement depuis notre interface web — et bientôt intégrée dans tes applis préférées.
+          </div>
+        </details>
+
+        <!-- Item 4 -->
+        <details class="group bg-white rounded-full px-8 py-4 text-[#121822] w-full">
+          <summary
+            class="flex items-center justify-between cursor-pointer list-none font-fustat text-[14px] sm:text-[15px]"
+          >
+            <span>Quelles infos Vera peut vérifier ?</span>
+            <span class="ml-4 text-xl leading-none text-[#4B5563]">
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 34 34"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8.5 12.75L17 21.25L25.5 12.75"
+                  stroke="black"
+                  stroke-width="2.83333"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+          </summary>
+          <div class="mt-3 pt-1 text-[13px] sm:text-[14px] text-[#4B5563]">
+            Actus, vidéos virales, rumeurs, chiffres, citations… Si c’est douteux, Vera peut
+            vérifier.
+          </div>
+        </details>
+
+        <!-- Item 5 -->
+        <details class="group bg-white rounded-full px-8 py-4 text-[#121822] w-full">
+          <summary
+            class="flex items-center justify-between cursor-pointer list-none font-fustat text-[14px] sm:text-[15px]"
+          >
+            <span>Avec qui travaille Vera ?</span>
+            <span class="ml-4 text-xl leading-none text-[#4B5563]">
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 34 34"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8.5 12.75L17 21.25L25.5 12.75"
+                  stroke="black"
+                  stroke-width="2.83333"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+          </summary>
+          <div class="mt-3 pt-1 text-[13px] sm:text-[14px] text-[#4B5563]">
+            Vera s’appuie sur des médias fiables, des organismes publics et des partenaires
+            spécialisés dans le fact-checking pour garantir des réponses justes et vérifiables.
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
 </main>
 
 <!-- FOOTER -->
