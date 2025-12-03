@@ -65,7 +65,7 @@
         />
 
         <!-- Micro -->
-        <button
+        <!-- <button
           type="button"
           class="flex items-center justify-center h-7 w-7 sm:h-9 sm:w-9 rounded-full hover:bg-slate-100 transition"
           aria-label="Commande vocale"
@@ -98,7 +98,8 @@
               stroke-linejoin="round"
             />
           </svg>
-        </button>
+        </button> -->
+        <app-mic-button (micClick)="startVoiceCommand()"></app-mic-button>
 
         <!-- Envoyer -->
         <button

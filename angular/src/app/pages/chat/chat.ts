@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, NgZone, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { VeraHeaderComponent } from '../../shared/vera-header/vera-header.component';
 import { VeraFooterComponent } from '../../shared/vera-footer/vera-footer.component';
+import { MicButtonComponent } from '../../shared/mic-button/mic-button';
 
 type ChatRole = 'user' | 'assistant';
+declare var webkitSpeechRecognition: any;
 
 interface ChatMessage {
   id: number;
@@ -20,26 +22,25 @@ interface ChatMessage {
   selector: 'app-chat',
   standalone: true,
   templateUrl: './chat.html',
-  imports: [CommonModule, FormsModule, VeraHeaderComponent, VeraFooterComponent],
+  imports: [
+    MicButtonComponent,
+    CommonModule,
+    FormsModule,
+    VeraHeaderComponent,
+    VeraFooterComponent,
+  ],
 })
-export class ChatComponent {
+export class ChatComponent implements AfterViewInit {
   copiedMessageId: number | null = null;
   shareOpenFor: number | null = null;
+
+  @ViewChild('bottomAnchor') bottomAnchor!: ElementRef<HTMLDivElement>;
 
   messages: ChatMessage[] = [
     {
       id: 1,
-      role: 'user',
-      content: 'Est-ce que les canards sont verts ?',
-      createdAt: new Date(),
-      liked: false,
-      disliked: false,
-    },
-    {
-      id: 2,
       role: 'assistant',
-      content:
-        'Les canards ne sont pas “verts” en général. Cependant, chez certaines espèces, les mâles présentent effectivement des plumes vertes.',
+      content: 'Bonjour ! Je suis Vera \nPosez-moi une question.',
       createdAt: new Date(),
       liked: false,
       disliked: false,
@@ -64,6 +65,9 @@ export class ChatComponent {
     this.messages.push(userMsg);
     this.currentQuestion = '';
 
+    // 🔽 scroll après ajout du message user
+    setTimeout(() => this.scrollToBottom(), 0);
+
     try {
       const answerText = await this.callVeraApi(question);
 
@@ -76,6 +80,9 @@ export class ChatComponent {
         disliked: false,
       };
       this.messages.push(veraMsg);
+
+      // 🔽 scroll après réponse de Vera
+      setTimeout(() => this.scrollToBottom(), 0);
     } catch (err) {
       console.error('Erreur API Vera', err);
       const errorMsg: ChatMessage = {
@@ -87,6 +94,9 @@ export class ChatComponent {
         disliked: false,
       };
       this.messages.push(errorMsg);
+
+      // 🔽 scroll aussi en cas d’erreur
+      setTimeout(() => this.scrollToBottom(), 0);
     }
   }
 
@@ -191,18 +201,87 @@ export class ChatComponent {
   }
 
   // Commande vocale
-  startVoiceCommand() {
-    console.log('TODO: commande vocale Vera');
+  isRecording = false;
+  private recognition: any = null;
+
+  constructor(private route: ActivatedRoute, private ngZone: NgZone) {}
+
+  async startVoiceCommand() {
+    console.log('startVoiceCommand() appelé');
+
+    // Si la reco n’est pas encore initialisée
+    if (!this.recognition) {
+      const SpeechRecognition =
+        (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+
+      if (!SpeechRecognition) {
+        console.warn('❌ La reconnaissance vocale n’est pas supportée par ce navigateur.');
+        return;
+      }
+
+      console.log('Initialisation de SpeechRecognition...');
+      this.recognition = new SpeechRecognition();
+      this.recognition.lang = 'fr-FR';
+      this.recognition.interimResults = false;
+      this.recognition.maxAlternatives = 1;
+
+      this.recognition.onresult = (event: any) => {
+        console.log('onresult appelé', event);
+        const transcript = event.results[0][0].transcript;
+        console.log('Texte reconnu :', transcript);
+
+        this.ngZone.run(() => {
+          this.currentQuestion = transcript;
+          // si tu veux envoi auto, décommente :
+          this.sendMessage();
+        });
+      };
+
+      this.recognition.onerror = (event: any) => {
+        console.error('Erreur reco vocale :', event.error);
+        this.isRecording = false;
+      };
+
+      this.recognition.onend = () => {
+        console.log('Reconnaissance vocale terminée (onend)');
+        this.ngZone.run(() => {
+          this.isRecording = false;
+        });
+      };
+    }
+
+    // Si c’est déjà en train d’enregistrer, on ne fait rien
+    if (this.isRecording) {
+      console.log('Déjà en enregistrement, on ignore le clic');
+      return;
+    }
+
+    // On démarre l’écoute
+    this.isRecording = true;
+    console.log('Démarrage reconnaissance vocale (start)');
+    this.recognition.start();
+  }
+  ngAfterViewInit() {
+    this.scrollToBottom();
   }
 
-  constructor(private route: ActivatedRoute) {}
+  private scrollToBottom() {
+    try {
+      if (this.bottomAnchor?.nativeElement) {
+        this.bottomAnchor.nativeElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'end',
+        });
+      }
+    } catch (e) {
+      console.error('Erreur scrollToBottom', e);
+    }
+  }
 
   ngOnInit() {
     const q = this.route.snapshot.queryParamMap.get('q');
     if (q) {
       this.currentQuestion = q;
-
-      // Option : envoyer automatiquement la question
       this.sendMessage();
     }
   }
