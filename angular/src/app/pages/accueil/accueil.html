@@ -5,7 +5,6 @@
 <section
   class="relative w-full h-screen flex flex-col items-center justify-center text-center overflow-hidden"
 >
-
   <!-- Background -->
   <div
     class="absolute inset-0 bg-cover bg-center"
@@ -16,40 +15,128 @@
   <div class="absolute inset-0 bg-black/40"></div>
 
   <!-- Texte -->
-  <div class="relative z-10 flex flex-col items-center px-6">
-
-    <h1 class="text-white font-serif text-5xl sm:text-6xl font-semibold mb-2">
+  <div class="relative z-10 flex flex-col items-center px-6 mt-[5rem]">
+    <h1 class="font-lastik font-normal text-[48px] sm:text-[60px] lg:text-[78px] text-white mb-2">
       Garde la flemme
     </h1>
 
-    <p class="text-white/80 text-lg sm:text-xl mb-10">
+    <p
+      class="font-fustat font-light text-[22px] sm:text-[28px] lg:text-[32px] text-white/80 mb-[8rem]"
+    >
       On s’occupe du reste.
     </p>
 
     <!-- Barre de recherche / input -->
-    <div
-      class="relative bg-white rounded-full w-full max-w-2xl flex items-center px-5 py-3 shadow-lg"
-    >
-      <button class="text-xl mr-3">+</button>
+    <!-- Barre de recherche -->
+    <div class="w-full flex justify-center px-4 sm:px-0">
+      <div
+        class="flex items-center gap-[10px] w-[387px] /* mobile */ sm:w-[550px] /* intermédiaire */ md:w-[787px] /* desktop */ h-[42px] sm:h-[46px] md:h-[49px] bg-white border border-[#E5E5E5] rounded-[100px] px-[12px] py-[3px]"
+      >
+        <!-- Bouton + -->
+        <button
+          type="button"
+          class="flex items-center justify-center h-7 w-7 sm:h-9 sm:w-9 rounded-full hover:bg-slate-100 transition"
+          aria-label="Nouvelle question"
+        >
+          <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5">
+            <path
+              d="M4.13477 9.9231H15.7117"
+              stroke="#A5A5A5"
+              stroke-width="1.65385"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M9.92285 4.13464V15.7116"
+              stroke="#A5A5A5"
+              stroke-width="1.65385"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
 
-      <input
-        type="text"
-        placeholder="Pose ta question à Vera..."
-        class="flex-1 bg-transparent outline-none text-slate-700 text-sm"
-      />
+        <!-- Input -->
+        <input
+          type="text"
+          [(ngModel)]="homeQuestion"
+          placeholder="Pose ta question à Vera..."
+          class="flex-1 border-none bg-transparent outline-none text-[14px] sm:text-[16px] text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-0"
+        />
 
-      <button class="mr-3 text-lg">🎤</button>
+        <!-- Micro -->
+        <!-- <button
+          type="button"
+          class="flex items-center justify-center h-7 w-7 sm:h-9 sm:w-9 rounded-full hover:bg-slate-100 transition"
+          aria-label="Commande vocale"
+        >
+          <svg
+            viewBox="0 0 43 43"
+            class="h-7 w-7 sm:h-9 sm:w-9 md:h-12 md:w-12"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M21.9561 27.331V29.8118"
+              stroke="#A5A5A5"
+              stroke-width="1.65385"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M27.7444 19.8887V21.5426C27.7444 23.0778 27.1345 24.5501 26.049 25.6356C24.9635 26.7212 23.4911 27.331 21.9559 27.331C20.4207 27.331 18.9484 26.7212 17.8629 25.6356C16.7773 24.5501 16.1675 23.0778 16.1675 21.5426V19.8887"
+              stroke="#A5A5A5"
+              stroke-width="1.65385"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M24.4369 15.7541C24.4369 14.384 23.3262 13.2733 21.9561 13.2733C20.586 13.2733 19.4753 14.384 19.4753 15.7541V21.5425C19.4753 22.9126 20.586 24.0233 21.9561 24.0233C23.3262 24.0233 24.4369 22.9126 24.4369 21.5425V15.7541Z"
+              stroke="#A5A5A5"
+              stroke-width="1.65385"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button> -->
+        <app-mic-button (micClick)="startVoiceCommand()"></app-mic-button>
 
-      <button class="bg-slate-900 text-white rounded-full px-4 py-2">
-        ➤
-      </button>
+        <!-- Envoyer -->
+        <button
+          type="button"
+          class="flex items-center justify-center h-7 w-7 sm:h-9 sm:w-9 rounded-full hover:bg-slate-100 transition"
+          aria-label="Envoyer"
+          (click)="sendToChat()"
+        >
+          <svg
+            viewBox="0 0 43 43"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-7 w-7 sm:h-9 sm:w-9 md:h-12 md:w-12"
+          >
+            <path
+              d="M23.0693 29.6142C23.101 29.6931 23.156 29.7604 23.227 29.8071C23.2981 29.8538 23.3817 29.8777 23.4667 29.8755C23.5517 29.8734 23.634 29.8452 23.7025 29.7949C23.771 29.7447 23.8226 29.6746 23.8501 29.5942L29.2668 13.7608C29.2935 13.687 29.2986 13.6071 29.2815 13.5305C29.2644 13.4538 29.2258 13.3837 29.1703 13.3282C29.1148 13.2726 29.0446 13.2341 28.968 13.217C28.8914 13.1999 28.8115 13.205 28.7376 13.2317L12.9043 18.6483C12.8239 18.6759 12.7538 18.7274 12.7035 18.796C12.6532 18.8645 12.6251 18.9468 12.6229 19.0318C12.6208 19.1168 12.6446 19.2004 12.6914 19.2714C12.7381 19.3425 12.8054 19.3975 12.8843 19.4292L19.4926 22.0792C19.7015 22.1628 19.8914 22.2879 20.0506 22.4469C20.2099 22.6058 20.3353 22.7954 20.4193 23.0042L23.0693 29.6142Z"
+              stroke="#000000"
+              stroke-width="1.65"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M29.1677 13.3316L20.051 22.4474"
+              stroke="#000000"
+              stroke-width="1.65"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
     </div>
 
     <!-- Scroll icon -->
     <div class="absolute bottom-5 left-1/2 -translate-x-1/2">
       <span class="text-white text-2xl animate-bounce">⌄</span>
     </div>
-
   </div>
 </section>
 

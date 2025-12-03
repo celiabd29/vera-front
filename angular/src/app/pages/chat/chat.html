@@ -1,2 +1,279 @@
-<h2>{{ title }}</h2>
-<p>Page CHAT VERA</p>
+<div class="min-h-screen flex flex-col bg-white">
+  <!-- HEADER -->
+  <app-vera-header></app-vera-header>
+
+  <!-- CONTENU CHAT -->
+  <main class="flex-1 flex justify-center px-4 pt-4 sm:py-2">
+    <div class="w-full max-w-3xl flex flex-col relative h-[calc(100vh-140px)]">
+      <!-- Zone des messages -->
+      <section class="flex flex-col gap-8 flex-1 overflow-y-auto">
+        <!-- Messages (user / vera) -->
+        <div *ngFor="let msg of messages">
+          <!-- Message utilisateur (bulle à droite) -->
+          <div *ngIf="msg.role === 'user'" class="flex justify-end">
+            <div
+              class="bg-[#F7F7FA] text-slate-800 text-sm sm:text-base rounded-md px-5 py-3 shadow-sm max-w-md text-right"
+            >
+              {{ msg.content }}
+            </div>
+          </div>
+
+          <!-- Message Vera (avatar + carte) -->
+          <div *ngIf="msg.role === 'assistant'" class="flex items-start gap-3">
+            <!-- Avatar -->
+            <div
+              class="h-9 w-9 rounded-full overflow-hidden bg-slate-900 flex items-center justify-center"
+            >
+              <img
+                src="assets/avatar-vera.png"
+                alt="Vera"
+                class="h-9 w-9 rounded-full shadow-sm object-cover"
+              />
+            </div>
+
+            <!-- Carte réponse -->
+            <div class="flex-1">
+              <div
+                class="bg-[#F7F7FA] rounded-md px-5 py-4 text-sm sm:text-base text-slate-800 shadow-sm"
+              >
+                <p class="whitespace-pre-line">
+                  {{ msg.content }}
+                </p>
+              </div>
+
+              <!-- Actions (like, dislike, copy, share) -->
+              <div class="flex justify-end gap-3 mt-3 text-slate-500 text-xs sm:text-sm">
+                <!-- LIKE (pouce vers le haut) -->
+                <button
+                  type="button"
+                  (click)="toggleLike(msg)"
+                  class="hover:text-slate-700 transition cursor-pointer"
+                  aria-label="Utile"
+                >
+                  <svg width="19" height="19" viewBox="0 0 19 19" fill="none">
+                    <path
+                      d="M13.4583 7.91669V17.4167"
+                      [attr.stroke]="msg.liked ? '#B4D2FF' : '#121822'"
+                      stroke-width="1.65"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M7.1251 4.655L7.91677 7.91669H3.30135C3.05555 7.91669 2.81312 7.97393 2.59326 8.08384C2.37341 8.19374 2.18217 8.35342 2.03468 8.55002C1.8872 8.74662 1.78753 8.9748 1.74356 9.21669C1.69959 9.45853 1.71253 9.70738 1.78135 9.94335L3.62593 16.2767C3.72186 16.6056 3.92187 16.8945 4.19593 17.1C4.47 17.3056 4.80335 17.4167 5.14593 17.4167H15.8334C16.2534 17.4167 16.6561 17.2499 16.953 16.9529C17.25 16.656 17.4168 16.2533 17.4168 15.8333V9.50002C17.4168 9.08009 17.25 8.67736 16.953 8.38043C16.6561 8.0835 16.2534 7.91669 15.8334 7.91669H13.6484C13.3539 7.91647 13.0652 7.83421 12.8148 7.67896C12.5645 7.52371 12.3624 7.30165 12.2314 7.03788L9.5001 1.58331C9.12677 1.588 8.75931 1.67693 8.42517 1.84352C8.09104 2.01011 7.79887 2.24998 7.57049 2.54538C7.34211 2.84078 7.18343 3.1839 7.10631 3.54923C7.02918 3.91456 7.03561 4.29248 7.1251 4.655Z"
+                      [attr.stroke]="msg.liked ? '#B4D2FF' : '#121822'"
+                      stroke-width="1.65"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+
+                <!-- DISLIKE (pouce vers le bas) -->
+                <button
+                  type="button"
+                  (click)="toggleDislike(msg)"
+                  class="hover:text-slate-700 transition cursor-pointer"
+                  aria-label="Pas utile"
+                >
+                  <svg width="19" height="19" viewBox="0 0 19 19" fill="none">
+                    <path
+                      d="M13.4583 11.0833V1.58331"
+                      [attr.stroke]="msg.disliked ? '#B4D2FF' : '#121822'"
+                      stroke-width="1.65"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M7.1251 14.345L7.91677 11.0833H3.30135C3.05555 11.0833 2.81312 11.0261 2.59326 10.9162C2.37341 10.8062 2.18217 10.6466 2.03468 10.45C1.8872 10.2533 1.78753 10.0251 1.74356 9.78321C1.69959 9.54137 1.71253 9.29262 1.78135 9.05665L3.62593 2.72331C3.72186 2.39443 3.92187 2.10553 4.19593 1.89998C4.47 1.69443 4.80335 1.58331 5.14593 1.58331H15.8334C16.2534 1.58331 16.6561 1.75013 16.953 2.04706C17.25 2.34399 17.4168 2.74672 17.4168 3.16665V9.49998C17.4168 9.91991 17.25 10.3226 16.953 10.6196C16.6561 10.9165 16.2534 11.0833 15.8334 11.0833H13.6484C13.3539 11.0835 13.0652 11.1658 12.8148 11.321C12.5645 11.4763 12.3624 11.6983 12.2314 11.9621L9.5001 17.4166C9.12677 17.412 8.75931 17.3231 8.42517 17.1565C8.09104 16.9899 7.79887 16.75 7.57049 16.4546C7.34211 16.1592 7.18343 15.8161 7.10631 15.4508C7.02918 15.0855 7.03561 14.7075 7.1251 14.345Z"
+                      [attr.stroke]="msg.disliked ? '#B4D2FF' : '#121822'"
+                      stroke-width="1.65"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+
+                <!-- Copier -->
+                <button
+                  type="button"
+                  class="hover:text-slate-700 relative cursor-pointer"
+                  (click)="copyToClipboard(msg.content, msg.id)"
+                >
+                  <svg
+                    width="19"
+                    height="19"
+                    viewBox="0 0 19 19"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M15.8333 6.33331H7.91659C7.04213 6.33331 6.33325 7.0422 6.33325 7.91665V15.8333C6.33325 16.7078 7.04213 17.4166 7.91659 17.4166H15.8333C16.7077 17.4166 17.4166 16.7078 17.4166 15.8333V7.91665C17.4166 7.0422 16.7077 6.33331 15.8333 6.33331Z"
+                      stroke="#121822"
+                      stroke-width="1.65"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M3.16659 12.6666C2.29575 12.6666 1.58325 11.9541 1.58325 11.0833V3.16665C1.58325 2.29581 2.29575 1.58331 3.16659 1.58331H11.0833C11.9541 1.58331 12.6666 2.29581 12.6666 3.16665"
+                      stroke="#121822"
+                      stroke-width="1.65"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                  <span
+                    *ngIf="copiedMessageId === msg.id"
+                    class="absolute -bottom-7 right-0 text-[11px] text-blue-400"
+                  >
+                    Copié
+                  </span>
+                </button>
+
+                <!-- Share -->
+                <div class="relative">
+                  <button
+                    type="button"
+                    class="hover:text-slate-700 cursor-pointer"
+                    aria-label="Partager"
+                    (click)="toggleShareMenu(msg.id)"
+                  >
+                    <svg
+                      width="19"
+                      height="19"
+                      viewBox="0 0 19 19"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M9.5 1.58331V11.875"
+                        stroke="#121822"
+                        stroke-width="1.65"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M12.6666 4.74998L9.49992 1.58331L6.33325 4.74998"
+                        stroke="#121822"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M3.16675 9.5V15.8333C3.16675 16.2533 3.33356 16.656 3.6305 16.9529C3.92743 17.2499 4.33016 17.4167 4.75008 17.4167H14.2501C14.67 17.4167 15.0727 17.2499 15.3697 16.9529C15.6666 16.656 15.8334 16.2533 15.8334 15.8333V9.5"
+                        stroke="#121822"
+                        stroke-width="1.65"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </button>
+
+                  <!-- Petit menu de partage -->
+                  <div
+                    *ngIf="shareOpenFor === msg.id"
+                    class="absolute right-0 mt-2 bg-[#F7F7FA] border border-slate-200 rounded-md shadow-sm px-3 py-2 text-[11px] text-slate-700 z-10 min-w-[140px] flex flex-col gap-1"
+                  >
+                    <button
+                      type="button"
+                      class="text-left hover:text-slate-900"
+                      (click)="shareMessage(msg)"
+                    >
+                      Partager…
+                    </button>
+                    <button
+                      type="button"
+                      class="text-left hover:text-slate-900"
+                      (click)="copyShareLink(msg)"
+                    >
+                      Copier le lien
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div #bottomAnchor></div>
+      </section>
+
+      <!-- Barre d'entrée de question (style Vera) -->
+      <section class="w-full sticky bottom-8 z-30 flex justify-center mt-12 px-4 sm:px-0 bg-white">
+        <div
+          class="flex flex-col w-[450px] sm:w-[600px] md:w-[820px] bg-[#F7F7FA] rounded-md shadow-sm px-5 py-4 gap-3"
+        >
+          <!-- Ligne du texte -->
+          <input
+            type="text"
+            [(ngModel)]="currentQuestion"
+            (keyup.enter)="sendMessage()"
+            placeholder="Poses ta question à Vera..."
+            class="w-full bg-transparent border-none outline-none text-[14px] sm:text-[16px] text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-0"
+          />
+
+          <!-- Ligne des icônes -->
+          <div class="flex items-center justify-between">
+            <!-- + à gauche -->
+            <button
+              type="button"
+              (click)="newConversation()"
+              class="flex items-center justify-center h-8 w-8 rounded-full hover:bg-slate-200 transition cursor-pointer"
+              aria-label="Nouvelle conversation"
+            >
+              <svg viewBox="0 0 20 20" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M4.13477 9.9231H15.7117"
+                  stroke="#A5A5A5"
+                  stroke-width="1.65"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M9.92285 4.13464V15.7116"
+                  stroke="#A5A5A5"
+                  stroke-width="1.65"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </button>
+
+            <!-- micro + envoyer à droite -->
+            <div class="flex items-center gap-3">
+              <app-mic-button (micClick)="startVoiceCommand()"></app-mic-button>
+
+              <button
+                type="button"
+                (click)="sendMessage()"
+                class="flex items-center justify-center h-10 w-10 rounded-full hover:bg-slate-200 transition cursor-pointer"
+                aria-label="Envoyer"
+              >
+                <svg
+                  viewBox="0 0 43 43"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-10 w-10"
+                >
+                  <path
+                    d="M23.0693 29.6142C23.101 29.6931 23.156 29.7604 23.227 29.8071C23.2981 29.8538 23.3817 29.8777 23.4667 29.8755C23.5517 29.8734 23.634 29.8452 23.7025 29.7949C23.771 29.7447 23.8226 29.6746 23.8501 29.5942L29.2668 13.7608C29.2935 13.687 29.2986 13.6071 29.2815 13.5305C29.2644 13.4538 29.2258 13.3837 29.1703 13.3282C29.1148 13.2726 29.0446 13.2341 28.968 13.217C28.8914 13.1999 28.8115 13.205 28.7376 13.2317L12.9043 18.6483C12.8239 18.6759 12.7538 18.7274 12.7035 18.796C12.6532 18.8645 12.6251 18.9468 12.6229 19.0318C12.6208 19.1168 12.6446 19.2004 12.6914 19.2714C12.7381 19.3425 12.8054 19.3975 12.8843 19.4292L19.4926 22.0792C19.7015 22.1628 19.8914 22.2879 20.0506 22.4469C20.2099 22.6058 20.3353 22.7954 20.4193 23.0042L23.0693 29.6142Z"
+                    stroke="#000000"
+                    stroke-width="1.65"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M29.1677 13.3316L20.051 22.4474"
+                    stroke="#000000"
+                    stroke-width="1.65"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <app-vera-footer></app-vera-footer>
+</div>

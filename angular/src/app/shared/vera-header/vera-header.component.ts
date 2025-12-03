@@ -1,10 +1,14 @@
+
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { DarkModeService } from '../../services/darkmode.service';
 
 @Component({
   selector: 'app-vera-header',
   standalone: true,
   templateUrl: './vera-header-chat.component.html',
+  imports: [CommonModule, RouterModule],
 })
 export class VeraHeaderComponent implements OnInit {
   logoPath = 'assets/logo-vera-noir.png';
