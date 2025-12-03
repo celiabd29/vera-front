@@ -1,7 +1,6 @@
 <footer class="border-t border-slate-200 bg-black/40 mt-10">
-  <div
-    class="max-w-5xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 text-xs text-slate-500"
-  >
+
+  <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-6">
     <!-- Bloc gauche -->
     <div class="space-y-2">
       <div class="flex items-center">
@@ -14,17 +13,18 @@
         <a routerLink="/mention-legale" class="hover:underline text-black">Mention légale</a>
 <a routerLink="/politique-confidentialite" class="hover:underline text-black">Politique de confidentialité</a>
 
+      <div class="flex flex-wrap gap-4 mt-2">
+        <a routerLink="/mention-legale" class="underline text-xs font-fustat">Mention légale</a>
+        <a routerLink="/politique-confidentialite" class="underline text-xs font-fustat"
+          >Politique de confidentialité</a
+        >
       </div>
     </div>
 
     <!-- Bloc droite -->
     <div class="flex flex-col items-end gap-1 text-right">
-      <button type="button" class="text-xs hover:underline text-black ">
-        Aide
-      </button>
-      <button type="button" class="text-xs hover:underline text-black">
-        FAQ
-      </button>
+      <button type="button" class="text-xs hover:underline">Aide</button>
+      <button type="button" class="text-xs hover:underline">FAQ</button>
     </div>
   </div>
 </footer>
