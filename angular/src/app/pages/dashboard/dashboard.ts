@@ -44,6 +44,12 @@ interface QuestionConfig {
   providers: [provideEchartsCore({ echarts })],
 })
 export class DashboardComponent implements OnInit {
+    isDarkMode = false;
+
+  toggleDarkMode() {
+    this.isDarkMode = !this.isDarkMode;
+  }
+  
   surveyData: SurveyRow[] = [];
   headers: string[] = [];
   loading = true;
