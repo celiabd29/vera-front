@@ -2,6 +2,7 @@ import { Component, NgZone, ViewChild, ElementRef, AfterViewInit } from '@angula
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from '../../../environments/environment';
 import { VeraHeaderComponent } from '../../shared/vera-header/vera-header.component';
 import { VeraFooterComponent } from '../../shared/vera-footer/vera-footer.component';
 import { MicButtonComponent } from '../../shared/mic-button/mic-button';
@@ -106,17 +107,15 @@ export class ChatComponent implements AfterViewInit {
     }
   }
 
-  // 🔌 Appel à TON backend: POST http://localhost:8000/api/v1/messages/ask
+  // 🔌 Appel à TON backend:
   private async callVeraApi(question: string): Promise<string> {
-    const response = await fetch('http://localhost:8000/api/v1/messages/ask', {
+    const response = await fetch(`${environment.apiBaseUrl}/api/v1/messages/ask`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       credentials: 'include',
-      body: JSON.stringify({
-        message: question,
-      }),
+      body: JSON.stringify({ message: question }),
     });
 
     console.log('Status backend:', response.status);
