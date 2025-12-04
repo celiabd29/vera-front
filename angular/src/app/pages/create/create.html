@@ -1,49 +1,96 @@
 <app-vera-header></app-vera-header>
 
-<div class="max-w-4xl mx-auto px-6 py-10">
-  <h1 class="text-3xl font-bold mb-4">Créer un compte</h1>
+<!-- Background + SVG décoratifs -->
+<div class="relative bg-blue-50 min-h-screen overflow-hidden">
+
+  <!-- SVG en haut à gauche -->
+  <svg class="absolute top-0 left-0 w-48 h-48 opacity-30 text-blue-200"
+       viewBox="0 0 200 200" fill="currentColor">
+    <circle cx="100" cy="100" r="100" />
+  </svg>
+
+  <!-- Titre -->
+  <div class="max-w-4xl mx-auto px-6 py-10 relative z-10">
+     <div class="max-w-4xl mx-auto px-6 py-10 relative z-10">
+    <h1 class="text-3xl font-semibold mb-6 text-gray-800 font-lastik">
+      Compte
+    </h1>
+  </div>
+
+  </div>
+
+  <!-- Card du formulaire -->
+  <div class="max-w-md mx-auto bg-white/70 backdrop-blur-md shadow-lg 
+              rounded-xl px-8 py-10 border border-gray-200 relative z-10 mb-20">
+
+    <form (ngSubmit)="create()" #loginForm="ngForm">
+
+      <!-- Nom complet -->
+      <div class="mb-6">
+        <label for="full_name" class="block mb-2 text-sm font-semibold text-gray-700">
+          Nom complet
+        </label>
+        <input
+          type="text"
+          id="full_name"
+          name="full_name"
+          [(ngModel)]="full_name"
+          required
+          placeholder="Vera"
+          class="w-full px-4 py-2 rounded-lg border border-gray-300 
+                 focus:ring-2 focus:ring-blue-500 focus:border-blue-400 transition"
+        />
+      </div>
+
+      <!-- Email -->
+      <div class="mb-6">
+        <label for="email" class="block mb-2 text-sm font-semibold text-gray-700">
+          Email
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="email"
+          required
+          placeholder="veragroupe5dc@gmail.com"
+          class="w-full px-4 py-2 rounded-lg border border-gray-300 
+                 focus:ring-2 focus:ring-blue-500 focus:border-blue-400 transition"
+        />
+      </div>
+
+      <!-- Mot de passe -->
+      <div class="mb-6">
+        <label for="password" class="block mb-2 text-sm font-semibold text-gray-700">
+          Mot de passe
+        </label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="password"
+          placeholder="••••••••"
+          class="w-full px-4 py-2 rounded-lg border border-gray-300 
+                 focus:ring-2 focus:ring-blue-500 focus:border-blue-400 transition"
+        />
+      </div>
+
+      <!-- Bouton -->
+      <button
+        type="submit"
+        class="w-full bg-gradient-to-r from-blue-600 to-blue-700 
+               text-white font-semibold py-2.5 rounded-lg shadow-md hover:opacity-90 transition">
+        Inscription
+      </button>
+    </form>
+  </div>
+
+  <!-- SVG bas à droite -->
+  <svg class="absolute bottom-0 right-0 w-64 h-64 opacity-20 text-blue-300"
+       viewBox="0 0 200 200" fill="currentColor">
+    <rect width="200" height="200" rx="100" />
+  </svg>
+
 </div>
-
-<form (ngSubmit)="create()" #loginForm="ngForm" class="max-w-sm mx-auto mt-10">
-  <div class="mb-5">
-    <label for="full_name" class="block mb-2 text-sm font-medium">Nom complet</label>
-    <input
-      type="text"
-      id="full_name"
-      [(ngModel)]="full_name"
-      name="full_name"
-      class="border rounded w-full px-3 py-2"
-      placeholder="Vera"
-      required
-    />
-  </div>
-  <div class="mb-5">
-    <label for="email" class="block mb-2 text-sm font-medium">Email</label>
-    <input
-      type="email"
-      id="email"
-      [(ngModel)]="email"
-      name="email"
-      class="border rounded w-full px-3 py-2"
-      placeholder="veragroupe5dc@gmail.com"
-      required
-    />
-  </div>
-  <div class="mb-5">
-    <label for="password" class="block mb-2 text-sm font-medium">Mot de passe</label>
-    <input
-      type="password"
-      id="password"
-      [(ngModel)]="password"
-      name="password"
-      class="border rounded w-full px-3 py-2"
-      placeholder="••••••••"
-    />
-  </div>
-
-  <button type="submit" class="bg-gray-600 text-white rounded px-4 py-2 hover:bg-blue-700">
-    Inscription
-  </button>
-</form>
 
 <app-vera-footer></app-vera-footer>
