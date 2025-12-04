@@ -44,48 +44,54 @@
               <!-- Actions (like, dislike, copy, share) -->
               <div class="flex justify-end gap-3 mt-3 text-slate-500 text-xs sm:text-sm">
                 <!-- LIKE (pouce vers le haut) -->
-                <button
-                  type="button"
-                  (click)="toggleLike(msg)"
-                  class="hover:text-slate-700 transition cursor-pointer"
-                  aria-label="Utile"
-                >
+               <button
+                type="button"
+                (click)="toggleLike(msg)"
+                [ngClass]="{
+                  'text-blue-400': msg.liked,
+                }"
+                class="transition cursor-pointer"
+                aria-label="Utile"
+              >
                   <svg width="19" height="19" viewBox="0 0 19 19" fill="none">
                     <path
                       d="M13.4583 7.91669V17.4167"
-                      [attr.stroke]="msg.liked ? '#B4D2FF' : '#121822'"
+                      stroke="currentColor"
                       stroke-width="1.65"
                       stroke-linecap="round"
                       stroke-linejoin="round"
                     />
                     <path
                       d="M7.1251 4.655L7.91677 7.91669H3.30135C3.05555 7.91669 2.81312 7.97393 2.59326 8.08384C2.37341 8.19374 2.18217 8.35342 2.03468 8.55002C1.8872 8.74662 1.78753 8.9748 1.74356 9.21669C1.69959 9.45853 1.71253 9.70738 1.78135 9.94335L3.62593 16.2767C3.72186 16.6056 3.92187 16.8945 4.19593 17.1C4.47 17.3056 4.80335 17.4167 5.14593 17.4167H15.8334C16.2534 17.4167 16.6561 17.2499 16.953 16.9529C17.25 16.656 17.4168 16.2533 17.4168 15.8333V9.50002C17.4168 9.08009 17.25 8.67736 16.953 8.38043C16.6561 8.0835 16.2534 7.91669 15.8334 7.91669H13.6484C13.3539 7.91647 13.0652 7.83421 12.8148 7.67896C12.5645 7.52371 12.3624 7.30165 12.2314 7.03788L9.5001 1.58331C9.12677 1.588 8.75931 1.67693 8.42517 1.84352C8.09104 2.01011 7.79887 2.24998 7.57049 2.54538C7.34211 2.84078 7.18343 3.1839 7.10631 3.54923C7.02918 3.91456 7.03561 4.29248 7.1251 4.655Z"
-                      [attr.stroke]="msg.liked ? '#B4D2FF' : '#121822'"
+                      stroke="currentColor"
                       stroke-width="1.65"
                       stroke-linecap="round"
                       stroke-linejoin="round"
                     />
-                  </svg>
-                </button>
+                </svg>
+              </button>
 
                 <!-- DISLIKE (pouce vers le bas) -->
                 <button
                   type="button"
                   (click)="toggleDislike(msg)"
-                  class="hover:text-slate-700 transition cursor-pointer"
+                  [ngClass]="{
+                  'text-red-400': msg.disliked,
+                }"
+                  class="transition cursor-pointer"
                   aria-label="Pas utile"
                 >
                   <svg width="19" height="19" viewBox="0 0 19 19" fill="none">
                     <path
                       d="M13.4583 11.0833V1.58331"
-                      [attr.stroke]="msg.disliked ? '#B4D2FF' : '#121822'"
+                      stroke="currentColor"
                       stroke-width="1.65"
                       stroke-linecap="round"
                       stroke-linejoin="round"
                     />
                     <path
                       d="M7.1251 14.345L7.91677 11.0833H3.30135C3.05555 11.0833 2.81312 11.0261 2.59326 10.9162C2.37341 10.8062 2.18217 10.6466 2.03468 10.45C1.8872 10.2533 1.78753 10.0251 1.74356 9.78321C1.69959 9.54137 1.71253 9.29262 1.78135 9.05665L3.62593 2.72331C3.72186 2.39443 3.92187 2.10553 4.19593 1.89998C4.47 1.69443 4.80335 1.58331 5.14593 1.58331H15.8334C16.2534 1.58331 16.6561 1.75013 16.953 2.04706C17.25 2.34399 17.4168 2.74672 17.4168 3.16665V9.49998C17.4168 9.91991 17.25 10.3226 16.953 10.6196C16.6561 10.9165 16.2534 11.0833 15.8334 11.0833H13.6484C13.3539 11.0835 13.0652 11.1658 12.8148 11.321C12.5645 11.4763 12.3624 11.6983 12.2314 11.9621L9.5001 17.4166C9.12677 17.412 8.75931 17.3231 8.42517 17.1565C8.09104 16.9899 7.79887 16.75 7.57049 16.4546C7.34211 16.1592 7.18343 15.8161 7.10631 15.4508C7.02918 15.0855 7.03561 14.7075 7.1251 14.345Z"
-                      [attr.stroke]="msg.disliked ? '#B4D2FF' : '#121822'"
+                      stroke="currentColor"
                       stroke-width="1.65"
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -108,14 +114,14 @@
                   >
                     <path
                       d="M15.8333 6.33331H7.91659C7.04213 6.33331 6.33325 7.0422 6.33325 7.91665V15.8333C6.33325 16.7078 7.04213 17.4166 7.91659 17.4166H15.8333C16.7077 17.4166 17.4166 16.7078 17.4166 15.8333V7.91665C17.4166 7.0422 16.7077 6.33331 15.8333 6.33331Z"
-                      stroke="#121822"
+                      stroke="currentColor"
                       stroke-width="1.65"
                       stroke-linecap="round"
                       stroke-linejoin="round"
                     />
                     <path
                       d="M3.16659 12.6666C2.29575 12.6666 1.58325 11.9541 1.58325 11.0833V3.16665C1.58325 2.29581 2.29575 1.58331 3.16659 1.58331H11.0833C11.9541 1.58331 12.6666 2.29581 12.6666 3.16665"
-                      stroke="#121822"
+                      stroke="currentColor"
                       stroke-width="1.65"
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -146,21 +152,21 @@
                     >
                       <path
                         d="M9.5 1.58331V11.875"
-                        stroke="#121822"
+                        stroke="currentColor"
                         stroke-width="1.65"
                         stroke-linecap="round"
                         stroke-linejoin="round"
                       />
                       <path
                         d="M12.6666 4.74998L9.49992 1.58331L6.33325 4.74998"
-                        stroke="#121822"
+                        stroke="currentColor"
                         stroke-width="2"
                         stroke-linecap="round"
                         stroke-linejoin="round"
                       />
                       <path
                         d="M3.16675 9.5V15.8333C3.16675 16.2533 3.33356 16.656 3.6305 16.9529C3.92743 17.2499 4.33016 17.4167 4.75008 17.4167H14.2501C14.67 17.4167 15.0727 17.2499 15.3697 16.9529C15.6666 16.656 15.8334 16.2533 15.8334 15.8333V9.5"
-                        stroke="#121822"
+                        stroke="currentColor"
                         stroke-width="1.65"
                         stroke-linecap="round"
                         stroke-linejoin="round"
