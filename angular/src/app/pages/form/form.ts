@@ -1,45 +1,47 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
-import { VeraFooterComponent } from '../../shared/vera-footer/vera-footer.component';
+import { HttpClientModule } from '@angular/common/http';
+
+import { AuthService } from '../../services/auth.service';
 import { VeraHeaderComponent } from '../../shared/vera-header/vera-header.component';
+import { VeraFooterComponent } from '../../shared/vera-footer/vera-footer.component';
 
 @Component({
   selector: 'app-index',
   standalone: true,
-  imports: [FormsModule, HttpClientModule, VeraHeaderComponent, VeraFooterComponent, RouterLink],
+  imports: [
+    FormsModule,
+    HttpClientModule,
+    VeraHeaderComponent,
+    VeraFooterComponent,
+    RouterLink, // pour les liens [routerLink] dans le template
+  ],
   templateUrl: './form.html',
   styleUrls: ['./form.css'],
 })
 export class IndexComponent {
-  title = 'VERA';
-  email: string = '';
-  password: string = '';
+  email = '';
+  password = '';
 
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
   login() {
-    this.http
-      .get<{ email: string }[]>(
-        'https://backendveraweb-production.up.railway.app/api/v1/auth/emails'
-      )
-      .subscribe({
-        next: (data) => {
-          const emailExists = data.some((item) => item.email === this.email);
+    this.auth.login(this.email, this.password).subscribe({
+      next: (res) => {
+        console.log('Réponse login:', res);
+        this.auth.saveToken(res.access_token);
+        this.router.navigate(['/dashboard']);
+      },
+      error: (err) => {
+        console.error('Erreur login', err);
 
-          if (emailExists && this.password === '1234') {
-            localStorage.setItem('token', 'ok');
-            this.router.navigate(['/dashboard']);
-          } else {
-            alert('Identifiants incorrects');
-          }
-        },
-        error: (err) => {
-          console.error('Erreur API', err);
-          alert('Impossible de vérifier les emails');
-        },
-      });
+        if (err.status === 401 || err.status === 400) {
+          alert('Email ou mot de passe incorrect.');
+        } else {
+          alert('Impossible de se connecter au serveur. Réessaie plus tard.');
+        }
+      },
+    });
   }
 }
