@@ -28,7 +28,7 @@ export class IndexComponent {
 
           if (emailExists && this.password === '1234') {
             localStorage.setItem('token', 'ok');
-            this.router.navigate(['/home']);
+            this.router.navigate(['/dashboard']);
           } else {
             alert('Identifiants incorrects');
           }
