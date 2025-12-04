@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'https://backendveraweb-production.up.railway.app/',
+  apiBaseUrl: 'https://backendveraweb-production.up.railway.app',
 };
