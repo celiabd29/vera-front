@@ -12,7 +12,7 @@
           <!-- Message utilisateur (bulle à droite) -->
           <div *ngIf="msg.role === 'user'" class="flex justify-end">
             <div
-              class="bg-[#F7F7FA] text-slate-800 text-sm sm:text-base rounded-md px-5 py-3 shadow-sm max-w-md text-right"
+              class=" bubble-user text-sm sm:text-base text-slate-800 text-sm sm:text-base rounded-md px-5 py-3 shadow-sm max-w-md text-right"
             >
               {{ msg.content }}
             </div>
@@ -34,7 +34,7 @@
             <!-- Carte réponse -->
             <div class="flex-1">
               <div
-                class="bg-[#F7F7FA] rounded-md px-5 py-4 text-sm sm:text-base text-slate-800 shadow-sm"
+                class=" bubble-user text-sm sm:text-base rounded-md px-5 py-4 text-sm sm:text-base text-slate-800 shadow-sm"
               >
                 <p class="whitespace-pre-line">
                   {{ msg.content }}
@@ -199,7 +199,7 @@
       <!-- Barre d'entrée de question (style Vera) -->
       <section class="w-full sticky bottom-8 z-30 flex justify-center mt-12 px-4 sm:px-0 bg-white">
         <div
-          class="flex flex-col w-[450px] sm:w-[600px] md:w-[820px] bg-[#F7F7FA] rounded-md shadow-sm px-5 py-4 gap-3"
+          class="flex flex-col w-[450px] sm:w-[600px] md:w-[820px]  bubble-user text-sm sm:text-base shadow-sm px-5 py-4 gap-3"
         >
           <!-- Ligne du texte -->
           <input

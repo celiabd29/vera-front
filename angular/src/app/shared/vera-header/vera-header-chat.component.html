@@ -10,14 +10,29 @@
     <!-- Actions à droite -->
     <div class="flex items-center gap-6 text-sm">
       <div class="flex items-center gap-2 text-sm">
-        <span class="text-xl" (click)="toggleDarkMode()">
-          <svg
-            width="27"
-            height="27"
-            viewBox="0 0 27 27"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+        <span class="text-xl" (click)="toggleDarkMode()"
+          [ngClass]="{ 'stroke-white': isDarkMode, 'stroke-[#121822]': !isDarkMode }">
+
+          <svg *ngIf="isDarkMode" width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <g clip-path="url(#clip0_402_2960)">
+          <path d="M10.8997 14.5122C12.8951 14.5122 14.5126 12.8948 14.5126 10.8996C14.5126 8.90432 12.8951 7.28687 10.8997 7.28687C8.9044 7.28687 7.28687 8.90432 7.28687 10.8996C7.28687 12.8948 8.9044 14.5122 10.8997 14.5122Z" stroke="#121822" stroke-width="1.80637" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M10.6738 1.64185V3.44819" stroke="#121822" stroke-width="1.80637" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M10.6738 17.8994V19.7058" stroke="#121822" stroke-width="1.80637" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M4.28809 4.28784L5.56162 5.56131" stroke="#121822" stroke-width="1.80637" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M15.7861 15.7861L17.0597 17.0596" stroke="#121822" stroke-width="1.80637" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M1.64209 10.6738H3.44852" stroke="#121822" stroke-width="1.80637" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M17.8994 10.6738H19.7058" stroke="#121822" stroke-width="1.80637" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M5.56162 15.7861L4.28809 17.0596" stroke="#121822" stroke-width="1.80637" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M17.0597 4.28784L15.7861 5.56131" stroke="#121822" stroke-width="1.80637" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+          <defs>
+          <clipPath id="clip0_402_2960">
+          <rect width="21.5148" height="21.5148" fill="white"/>
+          </clipPath>
+          </defs>
+          </svg>
+
+          <svg *ngIf="!isDarkMode" width="27" height="27" viewBox="0 0 27 27" fill="none">
             <path
               d="M12.7205 3.573C11.5075 4.786 10.8261 6.43119 10.8261 8.14663C10.8261 9.86208 11.5075 11.5073 12.7205 12.7203C13.9335 13.9333 15.5787 14.6147 17.2942 14.6147C19.0096 14.6147 20.6548 13.9333 21.8678 12.7203C21.8678 14.5294 21.3313 16.298 20.3262 17.8022C19.3211 19.3065 17.8925 20.4789 16.221 21.1712C14.5496 21.8636 12.7104 22.0447 10.936 21.6918C9.16158 21.3388 7.53169 20.4676 6.25242 19.1884C4.97315 17.9091 4.10196 16.2792 3.74901 14.5048C3.39606 12.7304 3.57721 10.8912 4.26954 9.21976C4.96188 7.54831 6.1343 6.11971 7.63857 5.11459C9.14283 4.10948 10.9114 3.573 12.7205 3.573Z"
               stroke="#121822"

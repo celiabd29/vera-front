@@ -21,6 +21,22 @@ body.dark-theme {
   color: #ffffff;
 }
 
+.bubble-user {
+  background-color: #F7F7FA;
+  color: #282E38;
+}
+
+.bubble-assistant {
+  background-color: #F7F7FA;
+  color: #282E38;
+}
+
+body.dark-theme .bubble-user,
+body.dark-theme .bubble-assistant {
+  background-color: #3c4555;
+  color: #ffffff;
+}
+
 
 
 @font-face {
