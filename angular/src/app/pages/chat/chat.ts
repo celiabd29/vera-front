@@ -114,7 +114,7 @@ export class ChatComponent implements AfterViewInit {
       headers: {
         'Content-Type': 'application/json',
       },
-      credentials: 'include',
+      // credentials: 'include',
       body: JSON.stringify({ message: question }),
     });
 
