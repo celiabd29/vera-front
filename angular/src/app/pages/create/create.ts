@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { VeraFooterComponent } from '../../shared/vera-footer/vera-footer.component';
 import { VeraHeaderComponent } from '../../shared/vera-header/vera-header.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-create',
   standalone: true,
-  imports: [CommonModule, FormsModule, VeraHeaderComponent, VeraFooterComponent],
-  templateUrl: './create.html',
+  imports: [CommonModule, FormsModule, HttpClientModule, VeraHeaderComponent, VeraFooterComponent],
+  templateUrl: './create.html'
 })
 export class CreateComponent {
 
