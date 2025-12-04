@@ -2,17 +2,17 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { VeraFooterComponent } from '../../shared/vera-footer/vera-footer.component';
 import { VeraHeaderComponent } from '../../shared/vera-header/vera-header.component';
 
 @Component({
   selector: 'app-index',
   standalone: true,
-  imports: [FormsModule, HttpClientModule, VeraHeaderComponent, VeraFooterComponent ],
+  imports: [FormsModule, HttpClientModule, VeraHeaderComponent, VeraFooterComponent, RouterLink],
   templateUrl: './form.html',
-  styleUrls: ['./form.css']
+  styleUrls: ['./form.css'],
 })
-
 export class IndexComponent {
   title = 'VERA';
   email: string = '';
@@ -21,10 +21,13 @@ export class IndexComponent {
   constructor(private router: Router, private http: HttpClient) {}
 
   login() {
-    this.http.get<{ email: string }[]>('https://backendveraweb-production.up.railway.app/api/v1/auth/emails')
+    this.http
+      .get<{ email: string }[]>(
+        'https://backendveraweb-production.up.railway.app/api/v1/auth/emails'
+      )
       .subscribe({
         next: (data) => {
-          const emailExists = data.some(item => item.email === this.email);
+          const emailExists = data.some((item) => item.email === this.email);
 
           if (emailExists && this.password === '1234') {
             localStorage.setItem('token', 'ok');
@@ -36,7 +39,7 @@ export class IndexComponent {
         error: (err) => {
           console.error('Erreur API', err);
           alert('Impossible de vérifier les emails');
-        }
+        },
       });
   }
 }
