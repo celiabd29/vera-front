@@ -2,13 +2,15 @@
   <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-2">
     <!-- Logo -->
     <a routerLink="/" class="flex items-center cursor-pointer">
-      <img src="assets/logo-vera-noir.png" alt="Vera" class="h-26 w-auto" />
+      <!-- <img src="assets/logo-vera-noir.png" alt="Vera" class="h-26 w-auto" /> -->
+      <img [src]="logoPath" alt="Vera" class="h-26 w-auto" />
+
     </a>
 
     <!-- Actions à droite -->
     <div class="flex items-center gap-6 text-sm">
       <div class="flex items-center gap-2 text-sm">
-        <span class="text-xl">
+        <span class="text-xl" (click)="toggleDarkMode()">
           <svg
             width="27"
             height="27"

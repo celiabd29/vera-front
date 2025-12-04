@@ -31,6 +31,12 @@ interface ChatMessage {
   ],
 })
 export class ChatComponent implements AfterViewInit {
+  isDarkMode = false;
+
+  toggleDarkMode() {
+    this.isDarkMode = !this.isDarkMode;
+  }
+
   copiedMessageId: number | null = null;
   shareOpenFor: number | null = null;
 
