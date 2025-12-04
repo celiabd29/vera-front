@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-
+import { Router } from '@angular/router';
 import { SurveyService, SurveyRow } from '../../services/survey.service';
 import { VeraHeaderComponent } from '../../shared/vera-header/vera-header.component';
 
@@ -173,7 +173,12 @@ export class DashboardComponent implements OnInit {
 
   chartOptions: Record<string, any> = {};
 
-  constructor(private surveyService: SurveyService) {}
+  constructor(private surveyService: SurveyService, private router: Router) {}
+
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
+  }
 
   ngOnInit(): void {
     this.surveyService.getResults().subscribe({
