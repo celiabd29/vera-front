@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { SurveyService, SurveyRow } from '../../services/survey.service';
 import { VeraHeaderComponent } from '../../shared/vera-header/vera-header.component';
-
+import { environment } from '../../../environments/environment';
 import { NgxEchartsDirective, provideEchartsCore } from 'ngx-echarts';
 import * as echarts from 'echarts/core';
 import { BarChart, PieChart } from 'echarts/charts';
@@ -44,12 +44,12 @@ interface QuestionConfig {
   providers: [provideEchartsCore({ echarts })],
 })
 export class DashboardComponent implements OnInit {
-    isDarkMode = false;
+  isDarkMode = false;
 
   toggleDarkMode() {
     this.isDarkMode = !this.isDarkMode;
   }
-  
+
   surveyData: SurveyRow[] = [];
   headers: string[] = [];
   loading = true;
@@ -200,7 +200,7 @@ export class DashboardComponent implements OnInit {
         this.error = null;
       },
       error: (err) => {
-        console.error('❌ [Dashboard] Erreur API', err);
+        console.error('[Dashboard] Erreur API', err);
         this.error = 'Impossible de récupérer les résultats du sondage';
         this.loading = false;
       },
