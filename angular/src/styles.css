@@ -95,7 +95,7 @@ body.dark-theme .bubble-assistant {
     BlinkMacSystemFont,
     sans-serif
   );
-  font-size: 88px; /* Fustat 88px */
+  font-size: 70px; /* Fustat 88px */
   line-height: 0.8;
   color: #ffffff;
   transform: translateY(-4px); /* petit ajustement vertical */
@@ -114,7 +114,10 @@ body.dark-theme .bubble-assistant {
   font-size: 18px; /* Fustat 18px */
   line-height: 1.4;
   color: #f9fafb;
-  white-space: nowrap;
+  word-wrap: break-word; /* coupe si un mot est trop long */
+  text-align: center;    /* garde le centrage horizontal */
+  text-align: center;
+  margin-right: 20px;
 }
 
 /* Sliders (on garde ce qu'on avait) */
