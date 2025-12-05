@@ -36,7 +36,7 @@
               <div
                 class="bubble-user text-sm sm:text-base rounded-md px-5 py-4 text-slate-800 shadow-sm"
               >
-                <!-- Si Vera est en train d'écrire -->
+                <!-- 👉 Si Vera est en train d'écrire -->
                 <ng-container *ngIf="msg.isTyping; else veraText">
                   <div class="typing-indicator">
                     <span class="typing-dot"></span>
@@ -45,7 +45,7 @@
                   </div>
                 </ng-container>
 
-                <!-- Texte normal de Vera -->
+                <!-- 👉 Texte normal de Vera -->
                 <ng-template #veraText>
                   <p class="whitespace-pre-line">
                     {{ msg.content }}
@@ -53,18 +53,16 @@
                 </ng-template>
               </div>
 
-              <!-- Actions (like, dislike, copy, share) -->
+              <!-- Actions (like, dislike, copy, share) : cachées pendant le typing -->
               <div
                 class="flex justify-end gap-3 mt-3 text-slate-500 text-xs sm:text-sm"
                 *ngIf="!msg.isTyping"
               >
-                <!-- LIKE (pouce vers le haut) -->
+                <!-- LIKE -->
                 <button
                   type="button"
                   (click)="toggleLike(msg)"
-                  [ngClass]="{
-                  'text-blue-400': msg.liked,
-                }"
+                  [ngClass]="{ 'text-blue-400': msg.liked }"
                   class="transition cursor-pointer"
                   aria-label="Utile"
                 >
