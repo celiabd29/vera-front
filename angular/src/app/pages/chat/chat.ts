@@ -17,6 +17,7 @@ interface ChatMessage {
   createdAt: Date;
   liked?: boolean;
   disliked?: boolean;
+  isTyping?: boolean;
 }
 
 @Component({
@@ -51,11 +52,12 @@ export class ChatComponent implements AfterViewInit {
       createdAt: new Date(),
       liked: false,
       disliked: false,
+      isTyping: false,
     },
   ];
 
   currentQuestion = '';
-  private nextId = 3;
+  private nextId = 2;
 
   async sendMessage() {
     const question = this.currentQuestion.trim();
@@ -72,37 +74,40 @@ export class ChatComponent implements AfterViewInit {
     this.messages.push(userMsg);
     this.currentQuestion = '';
 
-    // 🔽 scroll après ajout du message user
+    // scroll après message user
+    setTimeout(() => this.scrollToBottom(), 0);
+
+    // 👉 message “Vera tape...” (3 petits points animés)
+    const typingMsg: ChatMessage = {
+      id: this.nextId++,
+      role: 'assistant',
+      content: '',
+      createdAt: new Date(),
+      isTyping: true,
+      liked: false,
+      disliked: false,
+    };
+    this.messages.push(typingMsg);
     setTimeout(() => this.scrollToBottom(), 0);
 
     try {
       const answerText = await this.callVeraApi(question);
 
-      const veraMsg: ChatMessage = {
-        id: this.nextId++,
-        role: 'assistant',
-        content: answerText,
-        createdAt: new Date(),
-        liked: false,
-        disliked: false,
-      };
-      this.messages.push(veraMsg);
+      const msg = this.messages.find((m) => m.id === typingMsg.id);
+      if (msg) {
+        msg.isTyping = false;
+        msg.content = answerText;
+      }
 
-      // 🔽 scroll après réponse de Vera
       setTimeout(() => this.scrollToBottom(), 0);
     } catch (err) {
       console.error('Erreur API Vera', err);
-      const errorMsg: ChatMessage = {
-        id: this.nextId++,
-        role: 'assistant',
-        content: 'Oups… Je n’ai pas réussi à joindre Vera. Réessaie dans un instant.',
-        createdAt: new Date(),
-        liked: false,
-        disliked: false,
-      };
-      this.messages.push(errorMsg);
+      const msg = this.messages.find((m) => m.id === typingMsg.id);
+      if (msg) {
+        msg.isTyping = false;
+        msg.content = 'Oups… Je n’ai pas réussi à joindre Vera. Réessaie dans un instant.';
+      }
 
-      // 🔽 scroll aussi en cas d’erreur
       setTimeout(() => this.scrollToBottom(), 0);
     }
   }

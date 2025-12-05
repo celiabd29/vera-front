@@ -12,7 +12,7 @@
           <!-- Message utilisateur (bulle à droite) -->
           <div *ngIf="msg.role === 'user'" class="flex justify-end">
             <div
-              class=" bubble-user text-sm sm:text-base text-slate-800 text-sm sm:text-base rounded-md px-5 py-3 shadow-sm max-w-md text-right"
+              class="bubble-user text-sm sm:text-base text-slate-800 text-sm sm:text-base rounded-md px-5 py-3 shadow-sm max-w-md text-right"
             >
               {{ msg.content }}
             </div>
@@ -34,25 +34,40 @@
             <!-- Carte réponse -->
             <div class="flex-1">
               <div
-                class=" bubble-user text-sm sm:text-base rounded-md px-5 py-4 text-sm sm:text-base text-slate-800 shadow-sm"
+                class="bubble-user text-sm sm:text-base rounded-md px-5 py-4 text-slate-800 shadow-sm"
               >
-                <p class="whitespace-pre-line">
-                  {{ msg.content }}
-                </p>
+                <!-- Si Vera est en train d'écrire -->
+                <ng-container *ngIf="msg.isTyping; else veraText">
+                  <div class="typing-indicator">
+                    <span class="typing-dot"></span>
+                    <span class="typing-dot"></span>
+                    <span class="typing-dot"></span>
+                  </div>
+                </ng-container>
+
+                <!-- Texte normal de Vera -->
+                <ng-template #veraText>
+                  <p class="whitespace-pre-line">
+                    {{ msg.content }}
+                  </p>
+                </ng-template>
               </div>
 
               <!-- Actions (like, dislike, copy, share) -->
-              <div class="flex justify-end gap-3 mt-3 text-slate-500 text-xs sm:text-sm">
+              <div
+                class="flex justify-end gap-3 mt-3 text-slate-500 text-xs sm:text-sm"
+                *ngIf="!msg.isTyping"
+              >
                 <!-- LIKE (pouce vers le haut) -->
-               <button
-                type="button"
-                (click)="toggleLike(msg)"
-                [ngClass]="{
+                <button
+                  type="button"
+                  (click)="toggleLike(msg)"
+                  [ngClass]="{
                   'text-blue-400': msg.liked,
                 }"
-                class="transition cursor-pointer"
-                aria-label="Utile"
-              >
+                  class="transition cursor-pointer"
+                  aria-label="Utile"
+                >
                   <svg width="19" height="19" viewBox="0 0 19 19" fill="none">
                     <path
                       d="M13.4583 7.91669V17.4167"
@@ -68,8 +83,8 @@
                       stroke-linecap="round"
                       stroke-linejoin="round"
                     />
-                </svg>
-              </button>
+                  </svg>
+                </button>
 
                 <!-- DISLIKE (pouce vers le bas) -->
                 <button
@@ -205,7 +220,7 @@
       <!-- Barre d'entrée de question (style Vera) -->
       <section class="w-full sticky bottom-8 z-30 flex justify-center mt-12 px-4 sm:px-0 bg-white">
         <div
-          class="flex flex-col w-[450px] sm:w-[600px] md:w-[820px]  bubble-user text-sm sm:text-base shadow-sm px-5 py-4 gap-3"
+          class="flex flex-col w-[450px] sm:w-[600px] md:w-[820px] bubble-user text-sm sm:text-base shadow-sm px-5 py-4 gap-3"
         >
           <!-- Ligne du texte -->
           <input
