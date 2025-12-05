@@ -1,65 +1,113 @@
 <app-vera-header></app-vera-header>
 
-<div class="max-w-4xl mx-auto px-6 py-10">
-  <h1 class="text-3xl font-bold mb-4">Mentions légales</h1>
-</div>
+<div
+  class="relative min-h-screen overflow-hidden"
+  style="
+    background-image: url('/assets/fond-ml.png');
+    background-size: cover;
+    background-position: center;
+  "
+>
+  <!-- léger voile pour lisibilité -->
+  <div class="absolute inset-0"></div>
 
-<div class="ml-10 mr-10">
-1. Editeur du site <br>
-<p class="" id="editeur"> Nom / Raison sociale : {{editeur}} </p>
-<p class="" id="statut"> Status Juridique : {{ statut }}</p>
-<p class="" id=" CS "> Capital Sociale : {{ CS  }}</p>
-<p class="" id=" adresse1"> Adresse du siège social : {{ adresse1 }}</p>
-<p class="" id=" tel1"> Téléphone : {{ tel1 }}</p>
-<p class="" id=" email"> Adresse e-mail : {{ email }}</p>
-<p class="" id=" siret"> Numéro SIRET : {{ siret }}</p>
-<p class="" id=" rcsrm"> Numéro RCS/RM (si applicable) : {{ rcsrm }}</p>
-<p class="" id=" tva"> Numéro de TVA intracommunautaire : {{ tva }}</p>
-<p class="" id=" directeur"> Directeur de la publication : {{ directeur }}</p>
-</div>
-<br>
-<div class="ml-10 mr-10">
-2.Hébergeur du site <br>
-<p class="" id="hebergeur"> Nom de l'hébergeur : {{ hebergeur }}</p>
-<p class="" id="adresse2 "> Adresse : {{ adresse2 }}</p>
-<p class="" id="tel2 "> Téléphone : {{ tel2 }}</p>
-<p class="" id="site "> Site web : {{ site }}</p>
-</div>
-<br>
-<div class="ml-10 mr-10">
-3.Propriété Intellectuelle
-<p> L'ensemble des éléments présents sur ce site (texte, images, graphismes, logos, vidéos, icônes, etc.) est protégé par le droit d'auteur et la législation sur la propriété intellectuelle.
-<br> Toute reproduction, distribution, modification ou adaptation de ces contenus, sans autorisation écrite préalable, est strictement interdite.
-</p>
-</div>
-<br>
-<div class="ml-10 mr-10">
-4. Données personnelles (RGPD)
-<p>Les informations personnelles collectées sur ce site sont exclusivement destinées à VERA, Florian GAUTHIER et ne seront en aucun cas vendues ou transmises à des tiers sans consentement.
-Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi « Informatique et Libertés », vous disposez d’un droit d’accès, de rectification, de suppression, d’opposition et de portabilité de vos données.</p>
-<p class="" id="demande "> Pour toute demande : {{ demande }}</p>
-<p class="" id="contact "> Email de contact : {{ contact }}</p>
-<p class="" id="adressePost "> Adresse Postale : {{ adressePost }}</p>
-</div>
-<br>
-<div class="ml-10 mr-10">
-5. Cookies
-<p>Le site peut utiliser des cookies pour améliorer l’expérience utilisateur, analyser le trafic ou proposer des services personnalisés. Vous pouvez paramétrer ou refuser les cookies via votre navigateur.</p>
-</div>
-<br>
-<div class="ml-10 mr-10">
-6. Responsabilité
-<p> VERA s’efforce de fournir des informations fiables et à jour, mais ne peut être tenu responsable des erreurs, omissions ou indisponibilités du service. L’utilisation des informations présentes sur le site se fait sous la seule responsabilité de l’utilisateur.</p>
-</div>
-<br>
-<div class="ml-10 mr-10">
-7. Liens externes
-<p>Le site peut contenir des liens vers des sites externes. VERA n’est pas responsable du contenu ni du fonctionnement de ces sites tiers.</p>
-</div>
-<br>
-<div class="ml-10 mr-10">
-8. Loi applicable
-<p> Les présentes mentions légales sont soumises au droit français. En cas de litige, et après tentative de résolution amiable, les tribunaux français seront seuls compétents.</p>
+  <!-- Contenu principal -->
+  <div class="relative max-w-6xl mx-auto px-10 py-16">
+    <!-- Titre + ligne -->
+    <h1 class="font-lastik text-4xl font-bold mb-6">Mention légale</h1>
+    <div class="h-px w-full bg-gray-700 mb-10"></div>
+
+    <!-- Texte des mentions -->
+    <div class="text-sm leading-relaxed space-y-6">
+      <!-- 1. Éditeur du site -->
+      <section class="space-y-1">
+        <p class="font-semibold">1. Éditeur du site</p>
+        <p id="editeur">Nom / Raison sociale : {{ editeur }}</p>
+        <p id="statut">Statut juridique : {{ statut }}</p>
+        <p id="CS">Capital social : {{ CS }}</p>
+        <p id="adresse1">Adresse du siège social : {{ adresse1 }}</p>
+        <p id="tel1">Téléphone : {{ tel1 }}</p>
+        <p id="email">Adresse e-mail : {{ email }}</p>
+        <p id="siret">Numéro SIRET : {{ siret }}</p>
+        <p id="rcsrm">Numéro RCS / RM (si applicable) : {{ rcsrm }}</p>
+        <p id="tva">Numéro de TVA intracommunautaire : {{ tva }}</p>
+        <p id="directeur">Directeur de la publication : {{ directeur }}</p>
+      </section>
+
+      <!-- 2. Hébergeur du site -->
+      <section class="space-y-1">
+        <p class="font-semibold">2. Hébergeur du site</p>
+        <p id="hebergeur">Nom de l'hébergeur : {{ hebergeur }}</p>
+        <p id="adresse2">Adresse : {{ adresse2 }}</p>
+        <p id="tel2">Téléphone : {{ tel2 }}</p>
+        <p id="site">Site web : {{ site }}</p>
+      </section>
+
+      <!-- 3. Propriété intellectuelle -->
+      <section class="space-y-1">
+        <p class="font-semibold">3. Propriété intellectuelle</p>
+        <p>
+          L'ensemble des éléments présents sur ce site (textes, images, graphismes, logos, vidéos,
+          icônes, etc.) est protégé par le droit d'auteur et la législation sur la propriété
+          intellectuelle. Toute reproduction, distribution, modification ou adaptation de ces
+          contenus, sans autorisation écrite préalable, est strictement interdite.
+        </p>
+      </section>
+
+      <!-- 4. Données personnelles (RGPD) -->
+      <section class="space-y-1">
+        <p class="font-semibold">4. Données personnelles (RGPD)</p>
+        <p>
+          Les informations personnelles collectées sur ce site sont exclusivement destinées à VERA,
+          Florian GAUTHIER et ne seront en aucun cas vendues ou transmises à des tiers sans
+          consentement. Conformément au Règlement Général sur la Protection des Données (RGPD) et à
+          la loi « Informatique et Libertés », vous disposez d’un droit d’accès, de rectification,
+          de suppression, d’opposition et de portabilité de vos données.
+        </p>
+        <p id="demande">Pour toute demande : {{ demande }}</p>
+        <p id="contact">Email de contact : {{ contact }}</p>
+        <p id="adressePost">Adresse postale : {{ adressePost }}</p>
+      </section>
+
+      <!-- 5. Cookies -->
+      <section class="space-y-1">
+        <p class="font-semibold">5. Cookies</p>
+        <p>
+          Le site peut utiliser des cookies pour améliorer l’expérience utilisateur, analyser le
+          trafic ou proposer des services personnalisés. Vous pouvez paramétrer ou refuser les
+          cookies via votre navigateur.
+        </p>
+      </section>
+
+      <!-- 6. Responsabilité -->
+      <section class="space-y-1">
+        <p class="font-semibold">6. Responsabilité</p>
+        <p>
+          VERA s’efforce de fournir des informations fiables et à jour, mais ne peut être tenue
+          responsable des erreurs, omissions ou indisponibilités du service. L’utilisation des
+          informations présentes sur le site se fait sous la seule responsabilité de l’utilisateur.
+        </p>
+      </section>
+
+      <!-- 7. Liens externes -->
+      <section class="space-y-1">
+        <p class="font-semibold">7. Liens externes</p>
+        <p>
+          Le site peut contenir des liens vers des sites externes. VERA n’est pas responsable du
+          contenu ni du fonctionnement de ces sites tiers.
+        </p>
+      </section>
+
+      <!-- 8. Loi applicable -->
+      <section class="space-y-1 mb-4">
+        <p class="font-semibold">8. Loi applicable</p>
+        <p>
+          Les présentes mentions légales sont soumises au droit français. En cas de litige, et après
+          tentative de résolution amiable, les tribunaux français seront seuls compétents.
+        </p>
+      </section>
+    </div>
+  </div>
 </div>
 
 <app-vera-footer></app-vera-footer>
