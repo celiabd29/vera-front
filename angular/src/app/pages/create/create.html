@@ -1,6 +1,5 @@
 <app-vera-header></app-vera-header>
 
-<!-- Background + SVG décoratifs -->
 <div
   class="relative min-h-screen overflow-hidden"
   style="
@@ -13,7 +12,7 @@
   <div
     class="max-w-md mx-auto bg-white/70 backdrop-blur-md shadow-lg rounded-xl px-8 py-10 border border-gray-200 relative z-10 mt-10 mb-20"
   >
-    <h1 class="text-3xl text-center font-semibold mb-6 text-gray-800 font-lastik">Inscriptions</h1>
+    <h1 class="text-3xl text-center font-semibold mb-6 text-gray-800 font-lastik">Inscription</h1>
 
     <form (ngSubmit)="create()" #loginForm="ngForm">
       <!-- Nom complet -->
@@ -64,7 +63,10 @@
       <!-- Bouton -->
       <button
         type="submit"
-        class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold py-2.5 rounded-lg shadow-md hover:opacity-90 transition"
+        class="w-full font-semibold py-2.5 rounded-lg shadow-md transition"
+        style="background-color: #a4baff; color: white"
+        onmouseover="this.style.backgroundColor='#B9CFFF'"
+        onmouseout="this.style.backgroundColor='#A4BAFF'"
       >
         Inscription
       </button>

@@ -14,6 +14,7 @@
     <h1 class="text-3xl text-center font-semibold mb-6 text-gray-800 font-lastik">
       Authentification
     </h1>
+
     <form (ngSubmit)="login()" #loginForm="ngForm">
       <!-- Email -->
       <div class="mb-6">
@@ -31,9 +32,9 @@
 
       <!-- Password -->
       <div class="mb-6">
-        <label for="password" class="block mb-2 text-sm font-semibold text-gray-700"
-          >Mot de passe</label
-        >
+        <label for="password" class="block mb-2 text-sm font-semibold text-gray-700">
+          Mot de passe
+        </label>
         <input
           type="password"
           id="password"
@@ -46,7 +47,7 @@
 
       <!-- Lien création -->
       <div class="mb-6 text-sm">
-        <a routerLink="/create" class="text-blue-600 hover:underline font-medium">
+        <a routerLink="/create" class="text-[#A4BAFF] hover:underline font-medium">
           Créer un compte ?
         </a>
       </div>
@@ -54,7 +55,10 @@
       <!-- Bouton -->
       <button
         type="submit"
-        class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold py-2.5 rounded-lg shadow-md hover:opacity-90 transition"
+        class="w-full font-semibold py-2.5 rounded-lg shadow-md transition"
+        style="background-color: #a4baff; color: white"
+        onmouseover="this.style.backgroundColor='#B9CFFF'"
+        onmouseout="this.style.backgroundColor='#A4BAFF'"
       >
         Se connecter
       </button>
