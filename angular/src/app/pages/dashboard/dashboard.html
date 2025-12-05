@@ -1,107 +1,145 @@
-<div class="min-h-screen flex flex-col ">
+<div class="min-h-screen flex flex-col">
   <!-- HEADER VERA -->
   <app-vera-header></app-vera-header>
 
   <!-- CONTENU PAGE -->
- <main class="flex-1 px-4 sm:px-6 lg:px-10 py-4 sm:py-8 lg:py-10"> 
-    <div class="max-w-6xl mx-auto">
-      <!-- Titre + intro -->
-      <header class="mb-6 sm:mb-8 flex items-start justify-between">
-        <div>
-          <p class="text-[10px] sm:text-xs tracking-[0.2em] uppercase text-gray-400">Dashboard</p>
-          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-semibold mt-2">Résultats du sondage</h1>
-          <p class="mt-2 text-xs sm:text-sm max-w-xl">
-            Visualisation des réponses au questionnaire Vera : profils, comportements, freins,
-            émotions et rapport aux IA.
-          </p>
-        </div>
+  <main class="flex-1 px-4 sm:px-6 lg:px-10 py-4 sm:py-8 lg:py-10">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-6 lg:gap-10">
+      <!-- ======= SIDEBAR VERTICALE ======= -->
+      <aside class="md:w-56 md:shrink-0">
+        <!-- Titre du menu -->
+        <p class="text-[10px] tracking-[0.2em] uppercase text-gray-400 mb-3">Sections</p>
 
-        <!-- Bouton déconnexion -->
-        <button
-          (click)="logout()"
-          class="text-sm hover:text-red-600 underline mt-1 sm:mt-0"
-        >
-          Déconnexion
-        </button>
-      </header>
-
-      <!-- États (chargement / erreur) -->
-      <div *ngIf="loading" class="text-gray-500 text-sm sm:text-base">Chargement des données…</div>
-
-      <div *ngIf="error" class="text-red-600 text-sm sm:text-base">
-        {{ error }}
-      </div>
-
-      <!-- GRAPHIQUES -->
-      <section *ngIf="!loading && !error" class="space-y-6 sm:space-y-8">
-        <!-- 🧀 Carte DEMO : âge + situation pro, côte à côte -->
-        <article
-          class="bg-gray-50/80 border border-gray-200 rounded-3xl shadow-sm px-3 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8"
-        >
-          <div
-            class="mb-4 sm:mb-6 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2"
+        <nav class="space-y-1">
+          <button
+            *ngFor="let section of sections"
+            type="button"
+            (click)="selectedSection = section.key"
+            class="w-full text-left rounded-2xl px-4 py-2.5 text-xs sm:text-sm transition flex items-center gap-2"
+            [ngClass]="
+              selectedSection === section.key
+                ? 'bg-[#A4BAFF] text-slate-900 shadow-sm'
+                : 'bg-transparent text-slate-600 hover:bg-slate-100'
+            "
           >
-            <div>
-              <h2 class="text-sm sm:text-base font-medium text-gray-900">Profil des répondants</h2>
-              <p class="mt-1 text-xs sm:text-sm text-gray-500">
-                Répartition selon l’âge et la situation professionnelle.
-              </p>
-            </div>
-            <div class="text-right text-xs sm:text-sm text-gray-500">
-              <div class="font-medium text-gray-800">
-                {{ surveyData.length }} réponses analysées
-              </div>
-            </div>
+            <span
+              class="inline-block w-1.5 h-1.5 rounded-full"
+              [ngClass]="selectedSection === section.key ? 'bg-slate-900' : 'bg-slate-300'"
+            ></span>
+            {{ section.label }}
+          </button>
+        </nav>
+      </aside>
+
+      <!-- ======= COLONNE CONTENU ======= -->
+      <div class="flex-1">
+        <!-- Titre + intro -->
+        <header class="mb-6 sm:mb-8 flex items-start justify-between">
+          <div>
+            <p class="text-[10px] sm:text-xs tracking-[0.2em] uppercase text-gray-400">Dashboard</p>
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-semibold mt-2">
+              Résultats du sondage
+            </h1>
+            <p class="mt-2 text-xs sm:text-sm max-w-xl">
+              Visualisation des réponses au questionnaire Vera : profils, comportements, freins,
+              émotions et rapport aux IA.
+            </p>
           </div>
 
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div *ngFor="let q of demographicQuestions">
-              <h3 class="text-xs sm:text-sm font-medium text-gray-800 mb-2">
-                {{ q.title }}
-              </h3>
+          <!-- Bouton déconnexion -->
+          <button
+            (click)="logout()"
+            class="text-xs sm:text-sm hover:text-red-600 underline mt-1 sm:mt-0"
+          >
+            Déconnexion
+          </button>
+        </header>
+
+        <!-- États (chargement / erreur) -->
+        <div *ngIf="loading" class="text-gray-500 text-sm sm:text-base mb-4">
+          Chargement des données…
+        </div>
+
+        <div *ngIf="error" class="text-red-600 text-sm sm:text-base mb-4">
+          {{ error }}
+        </div>
+
+        <!-- ======= GRAPHIQUES ======= -->
+        <section *ngIf="!loading && !error" class="space-y-6 sm:space-y-8">
+          <!-- Bloc profil : âge + situation pro -->
+          <article
+            *ngIf="selectedSection === 'overview' || selectedSection === 'profil'"
+            class="bg-gray-50/80 border border-gray-200 rounded-3xl shadow-sm px-3 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8"
+          >
+            <div
+              class="mb-4 sm:mb-6 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2"
+            >
+              <div>
+                <h2 class="text-sm sm:text-base font-medium text-gray-900">
+                  Profil des répondants
+                </h2>
+                <p class="mt-1 text-xs sm:text-sm text-gray-500">
+                  Répartition selon l’âge et la situation professionnelle.
+                </p>
+              </div>
+              <div class="text-right text-xs sm:text-sm text-gray-500">
+                <div class="font-medium text-gray-800">
+                  {{ surveyData.length }} réponses analysées
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div *ngFor="let q of demographicQuestions">
+                <h3 class="text-xs sm:text-sm font-medium text-gray-800 mb-2">
+                  {{ q.title }}
+                </h3>
+                <div class="chart-container w-full" *ngIf="chartOptions[q.key]">
+                  <div echarts [options]="chartOptions[q.key]" class="w-full h-full"></div>
+                </div>
+                <div *ngIf="!chartOptions[q.key]" class="text-xs text-gray-400 italic mt-2">
+                  Données non disponibles pour cette question.
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Autres questions : filtrées par section -->
+          <ng-container *ngFor="let q of otherQuestions">
+            <article
+              *ngIf="selectedSection === 'overview' || selectedSection === q.sectionKey"
+              class="bg-gray-50/80 border border-gray-200 rounded-3xl shadow-sm px-3 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8"
+            >
+              <div
+                class="mb-4 sm:mb-6 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2"
+              >
+                <div>
+                  <h2 class="text-sm sm:text-base font-medium text-gray-900">
+                    {{ q.title }}
+                  </h2>
+                  <p class="mt-1 text-xs sm:text-sm text-gray-500">
+                    {{ q.subtitle }}
+                  </p>
+                </div>
+
+                <div class="text-right text-xs sm:text-sm text-gray-500">
+                  <div class="font-medium text-gray-800">
+                    {{ surveyData.length }} réponses analysées
+                  </div>
+                </div>
+              </div>
+
               <div class="chart-container w-full" *ngIf="chartOptions[q.key]">
                 <div echarts [options]="chartOptions[q.key]" class="w-full h-full"></div>
               </div>
-              <div *ngIf="!chartOptions[q.key]" class="text-xs text-gray-400 italic mt-2">
+
+              <div *ngIf="!chartOptions[q.key]" class="text-xs sm:text-sm text-gray-400 italic">
                 Données non disponibles pour cette question.
               </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- 📊 Une carte par autre question -->
-        <article
-          *ngFor="let q of otherQuestions"
-          class="bg-gray-50/80 border border-gray-200 rounded-3xl shadow-sm px-3 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8"
-        >
-          <div
-            class="mb-4 sm:mb-6 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2"
-          >
-            <div>
-              <h2 class="text-sm sm:text-base font-medium text-gray-900">
-                {{ q.title }}
-              </h2>
-              <p class="mt-1 text-xs sm:text-sm text-gray-500">
-                {{ q.subtitle }}
-              </p>
-            </div>
-
-            <div class="text-right text-xs sm:text-sm text-gray-500">
-              <div class="font-medium text-gray-800">
-                {{ surveyData.length }} réponses analysées
-              </div>
-            </div>
-          </div>
-
-          <div class="chart-container w-full" *ngIf="chartOptions[q.key]">
-            <div echarts [options]="chartOptions[q.key]" class="w-full h-full"></div>
-          </div>
-
-          <div *ngIf="!chartOptions[q.key]" class="text-xs sm:text-sm text-gray-400 italic">
-            Données non disponibles pour cette question.
-          </div>
-        </article>
-      </section>
+            </article>
+          </ng-container>
+        </section>
+      </div>
     </div>
   </main>
 </div>
