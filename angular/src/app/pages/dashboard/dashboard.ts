@@ -212,6 +212,12 @@ export class DashboardComponent implements OnInit {
 
   constructor(private surveyService: SurveyService, private router: Router) {}
 
+  getSectionLabel(sectionKey?: string): string {
+    if (!sectionKey) return '';
+    const sec = this.sections.find((s) => s.key === sectionKey);
+    return sec ? sec.label : '';
+  }
+
   logout() {
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
