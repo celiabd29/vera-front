@@ -24,6 +24,7 @@ interface ChatMessage {
   selector: 'app-chat',
   standalone: true,
   templateUrl: './chat.html',
+  styleUrls: ['./chat.css'],
   imports: [
     MicButtonComponent,
     CommonModule,
