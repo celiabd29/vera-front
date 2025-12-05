@@ -275,17 +275,17 @@ export class DashboardComponent implements OnInit {
 
     return {
       tooltip: { trigger: 'axis' },
-      grid: { left: 120, right: 20, top: 20, bottom: 40 },
+      grid: { left: 140, right: 20, top: 10, bottom: 30 },
       xAxis: {
         type: 'value',
-        name: 'Nombre de réponses',
+        name: 'Réponses',
       },
       yAxis: {
         type: 'category',
         data: labels,
         axisLabel: {
-          overflow: 'truncate',
-          width: 100,
+          width: 120,
+          overflow: 'truncate', // coupe proprement si trop long
         },
       },
       series: [
@@ -293,6 +293,10 @@ export class DashboardComponent implements OnInit {
           type: 'bar',
           data: values,
           barWidth: 18,
+          itemStyle: {
+            borderRadius: 6,
+            color: '#A4BAFF', // couleur Vera 💜
+          },
         },
       ],
     };

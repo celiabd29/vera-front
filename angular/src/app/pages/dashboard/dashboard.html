@@ -5,9 +5,8 @@
   <!-- CONTENU PAGE -->
   <main class="flex-1 px-4 sm:px-6 lg:px-10 py-4 sm:py-8 lg:py-10">
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-6 lg:gap-10">
-      <!-- ======= SIDEBAR VERTICALE ======= -->
-      <aside class="md:w-64 md:shrink-0 mr-6">
-        <!-- Label SECTIONS -->
+      <!-- SIDEBAR -->
+      <aside class="md:w-64 md:shrink-0 md:sticky md:top-28 self-start">
         <p
           class="text-[10px] tracking-[0.25em] uppercase mb-4"
           [ngClass]="isDarkMode ? 'text-slate-400' : 'text-slate-500'"
@@ -29,7 +28,6 @@
                 !isDarkMode && selectedSection !== section.key
             }"
           >
-            <!-- Petit point à gauche -->
             <span
               class="inline-block w-1.5 h-1.5 rounded-full"
               [ngClass]="
@@ -40,8 +38,6 @@
                   : 'bg-slate-400'
               "
             ></span>
-
-            <!-- Texte de la section -->
             <span class="truncate">
               {{ section.label }}
             </span>
@@ -123,35 +119,71 @@
           </article>
 
           <!-- Autres questions : filtrées par section -->
+          <!-- Autres questions : filtrées par section -->
           <ng-container *ngFor="let q of otherQuestions">
             <article
               *ngIf="selectedSection === 'overview' || selectedSection === q.sectionKey"
-              class="bg-gray-50/80 border border-gray-200 rounded-3xl shadow-sm px-3 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8"
+              class="rounded-3xl shadow-sm px-3 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 border"
+              [ngClass]="
+                isDarkMode ? 'bg-slate-800/60 border-slate-700' : 'bg-slate-50 border-slate-200/70'
+              "
             >
               <div
                 class="mb-4 sm:mb-6 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2"
               >
                 <div>
-                  <h2 class="text-sm sm:text-base font-medium text-gray-900">
+                  <!-- Petit badge de section -->
+                  <div class="flex items-center gap-2 mb-1" *ngIf="q.sectionKey">
+                    <span
+                      class="inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] uppercase tracking-[0.12em]"
+                      [ngClass]="
+                        isDarkMode ? 'bg-slate-800 text-slate-200' : 'bg-slate-100 text-slate-600'
+                      "
+                    >
+                      {{ sections.find(s => s.key === q.sectionKey)?.label }}
+                    </span>
+                  </div>
+
+                  <!-- Titre + sous-titre -->
+                  <h2
+                    class="text-sm sm:text-base font-medium"
+                    [ngClass]="isDarkMode ? 'text-slate-50' : 'text-gray-900'"
+                  >
                     {{ q.title }}
                   </h2>
-                  <p class="mt-1 text-xs sm:text-sm text-gray-500">
+                  <p
+                    class="mt-1 text-xs sm:text-sm"
+                    [ngClass]="isDarkMode ? 'text-slate-400' : 'text-gray-500'"
+                  >
                     {{ q.subtitle }}
                   </p>
                 </div>
 
-                <div class="text-right text-xs sm:text-sm text-gray-500">
-                  <div class="font-medium text-gray-800">
+                <!-- Compteur de réponses -->
+                <div
+                  class="text-right text-xs sm:text-sm"
+                  [ngClass]="isDarkMode ? 'text-slate-400' : 'text-gray-500'"
+                >
+                  <div
+                    class="font-medium"
+                    [ngClass]="isDarkMode ? 'text-slate-100' : 'text-gray-800'"
+                  >
                     {{ surveyData.length }} réponses analysées
                   </div>
                 </div>
               </div>
 
+              <!-- Graphique -->
               <div class="chart-container w-full" *ngIf="chartOptions[q.key]">
                 <div echarts [options]="chartOptions[q.key]" class="w-full h-full"></div>
               </div>
 
-              <div *ngIf="!chartOptions[q.key]" class="text-xs sm:text-sm text-gray-400 italic">
+              <!-- Fallback si pas de données -->
+              <div
+                *ngIf="!chartOptions[q.key]"
+                class="text-xs sm:text-sm italic"
+                [ngClass]="isDarkMode ? 'text-slate-500' : 'text-gray-400'"
+              >
                 Données non disponibles pour cette question.
               </div>
             </article>
