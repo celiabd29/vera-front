@@ -3,7 +3,7 @@ import {
   provideBrowserGlobalErrorListeners,
   provideZoneChangeDetection,
 } from '@angular/core';
-import { provideRouter, withRouterConfig } from '@angular/router';
+import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { routes } from './app.routes';
 import { provideEchartsCore } from 'ngx-echarts';
 import * as echarts from 'echarts/core';
@@ -18,13 +18,11 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-
-    // ⭐ Router configuré pour scroll vers les ancres (#faq)
     provideRouter(
       routes,
-      withRouterConfig({
-        anchorScrolling: 'enabled',
+      withInMemoryScrolling({
         scrollPositionRestoration: 'enabled',
+        anchorScrolling: 'enabled',
       })
     ),
 
