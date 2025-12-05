@@ -275,19 +275,24 @@ export class DashboardComponent implements OnInit {
 
     return {
       tooltip: { trigger: 'axis' },
+      grid: { left: 120, right: 20, top: 20, bottom: 40 },
       xAxis: {
-        type: 'category',
-        data: labels,
-        axisLabel: { interval: 0, rotate: 20 },
-      },
-      yAxis: {
         type: 'value',
         name: 'Nombre de réponses',
+      },
+      yAxis: {
+        type: 'category',
+        data: labels,
+        axisLabel: {
+          overflow: 'truncate',
+          width: 100,
+        },
       },
       series: [
         {
           type: 'bar',
           data: values,
+          barWidth: 18,
         },
       ],
     };
